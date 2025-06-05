@@ -2,7 +2,7 @@ import {StyleSheet} from "react-native";
 
 export const textStyles = StyleSheet.create({
     brand: {
-        fontWeight: 900,
+        fontWeight: 700,
         fontSize: 20,
         color: 'black'
     },
@@ -30,6 +30,18 @@ export const textStyles = StyleSheet.create({
         color: '#000000',
         marginBottom: 20
     },
+    header5Bold: {
+        fontWeight: 700,
+        fontSize: 10,
+        color: '#000000',
+        marginBottom: 20
+    },
+    header5BoldLight: {
+        fontWeight: 700,
+        fontSize: 10,
+        color: '#ffffff',
+        marginBottom: 20
+    },
     description: {
         fontSize: 16,
         marginBottom: 20
@@ -52,5 +64,25 @@ export const textStyles = StyleSheet.create({
     },
     digCardCountdown: {
         fontWeight: 700
-    }
+    },
+
+    // Post Text Styles
+    postUsername: {
+        fontWeight: 500,
+        fontSize: 14,
+        color: '#9f9f9f',
+        // marginBottom: 5
+    },
+    postMessage: {
+        fontWeight: 500,
+        fontSize: 16,
+        color: '#000000',
+        paddingVertical: 10,
+        width: '95%',
+        // flex: 1
+    },
+    searchResultUser: {
+        fontSize: 16,
+        fontWeight: 500
+    },
 })

@@ -3,7 +3,7 @@ import {StyleSheet} from "react-native";
 export const sectionStyles = StyleSheet.create({
     sectionA: {
         backgroundColor: "white",
-        // height: "30%",
+        height: "100%",
         width: "100%",
         padding: 20,
         marginBottom: 5

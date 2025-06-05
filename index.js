@@ -1,6 +1,6 @@
-import { registerRootComponent } from 'expo';
-import './firebase';
-
+import {registerRootComponent} from 'expo';
+// import './firebase';
+// import 'expo-router/entry';
 import App from './App';
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
@@ -30,3 +30,89 @@ export const getAllTemplates = async () => {
     // }
 }
 
+export const getAllTroves = async () => {
+    console.log('Getting all Troves')
+    let response = await fetch('http://192.168.1.119:9090/troves');
+    let troves = await response.json();
+    troves.sort((a,b) => new Date(b.troveCreatedTimestamp) - new Date(a.troveCreatedTimestamp));
+    console.log(troves)
+    return Array.isArray(troves) ? troves : [];
+}
+
+export const getAllUsers = async () => {
+    const users = await fetch('http://192.168.1.119:9090/users')
+    const allUsers = await users.json();
+    // console.log('All Users: ' + allUsers)
+    return Array.isArray(allUsers) ? allUsers : [];
+}
+
+export const createUser = async (username, password) => {
+    console.log('Initiating createUser function')
+    // First check to see if the user exists
+    const allUsers = await getAllUsers()
+    const searchedUser = allUsers.find(user => user.username === username);
+    if (searchedUser) {
+        console.log('User already exists')
+    }
+
+
+
+    // console.log('Creating New User with username: ', username, ' and password: ', password);
+    // let response = await fetch('http://192.168.1.119:9090/createUser', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         password: password,
+    //         username: username,
+    //         firstName: null,
+    //         lastName: null,
+    //         email: null
+    //     })
+    // })
+    // const text = await response.json();
+    // console.log('Raw response text:', text);
+    //
+    // try {
+    //     const user = JSON.parse(text);
+    //     console.log('jsonparse: ', user)
+    //     return Array.isArray(user) ? user : [];
+    // } catch (err) {
+    //     console.error('Failed to parse JSON:', err);
+    //     return [];
+    // }
+}
+
+// Posts
+
+export const createPost = async (user, post) => {
+    console.log('Creating a new post - User: ', user, ' / Post: ', post)
+    const createPost = await fetch('http://192.168.1.119:9090/createPost', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: {
+                userId: user.userId
+            },
+            body: post,
+            title: null,
+            timestamp: new Date().toISOString()
+        })
+    });
+    const response = await createPost.text();
+    console.log('Response: ', response)
+    await getMyPosts()
+}
+
+export const getMyPosts = async (user) => {
+    console.log('getMyPosts initiated... user: ', user.username, ' ', user.userId)
+    const response = await fetch(`http://192.168.1.119:9090/posts/user/${user.userId}`)
+    const myPosts = await response.json();
+    console.log('getMyPosts initiated... my posts: ', myPosts)
+    myPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+    // console.log('My Posts: ', myPosts)
+    return Array.isArray(myPosts) ? myPosts : [];
+}
