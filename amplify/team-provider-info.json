@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-trove-dev-c9a00-authRole",
+      "UnauthRoleArn": "arn:aws:iam::680373317279:role/amplify-trove-dev-c9a00-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::680373317279:role/amplify-trove-dev-c9a00-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-trove-dev-c9a00-deployment",
+      "UnauthRoleName": "amplify-trove-dev-c9a00-unauthRole",
+      "StackName": "amplify-trove-dev-c9a00",
+      "StackId": "arn:aws:cloudformation:us-east-2:680373317279:stack/amplify-trove-dev-c9a00/577f6990-41fb-11f0-8de1-02953f442ed3",
+      "AmplifyAppId": "d3pmzef77clxzv"
+    },
+    "categories": {
+      "auth": {
+        "trove25f51321": {}
+      }
+    }
+  }
+}

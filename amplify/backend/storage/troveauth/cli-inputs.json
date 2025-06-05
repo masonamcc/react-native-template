@@ -1,0 +1,14 @@
+{
+  "resourceName": "troveauth",
+  "policyUUID": "ceee6c1a",
+  "bucketName": "trove88ed3b8a121e491caed6408acd7b16bf",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
