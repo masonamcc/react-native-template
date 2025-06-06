@@ -9,10 +9,10 @@ import { textStyles } from './Styles/TextStyles.js';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {uiStyles} from "./Styles/UIStyles";
 import './firebase';
-// import { Amplify } from 'aws-amplify';
-// import awsconfig from './src/aws-exports';
-//
-// Amplify.configure(awsconfig);
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from './src/aws-exports';
+
+Amplify.configure(awsconfig);
 
 
 export default function App() {

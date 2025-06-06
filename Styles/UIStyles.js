@@ -56,7 +56,7 @@ export const uiStyles = StyleSheet.create({
     input: {
         height: 50,
         width: '100%',
-        borderColor: 'white',
+        borderColor: 'rgba(0,0,0,.2)',
         borderWidth: 1,
         marginBottom: 15,
         borderRadius: 8,

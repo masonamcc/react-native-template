@@ -5,19 +5,21 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import TemplateDetailsScreen from "../screens/TemplateDetailsScreen";
 import SettingsScreen from '../screens/SettingsScreen';
-import LoginScreen from '../screens/LoginScreen';
-import SignupScreen from '../screens/SignupScreen';
+import LoginScreen from '../screens/Authentication Screens/LoginScreen';
+import SignupScreen from '../screens/Authentication Screens/SignupScreen';
 import MyProfileScreen from "../screens/MyProfileScreen";
 import MyTrovesScreen from "../screens/TrovesScreen";
 
 import {StyleSheet} from "react-native";
 import {Ionicons} from '@expo/vector-icons';
-import OnboardingScreen1 from "../screens/OnboardingScreen1";
+import SetupScreen1 from "../screens/Setup Screens/SetupScreen1";
 import SearchScreen from "../screens/SearchScreen";
 
 import UserProfileScreen from "../screens/UserProfileScreen"
 import CreateTroveScreen from "../screens/Trove Screens/CreateTroveScreen";
 import BrowseTrovesScreen from "../screens/Trove Screens/BrowseTrovesScreen"
+
+import VerificationScreen from "../screens/Authentication Screens/VerificationScreen";
 
 // import SettingsScreen from '../screens/SettingsScreen';
 const RootStack = createStackNavigator();
@@ -36,7 +38,7 @@ function HomeStack({user}) {
             }}>
                 {(props) => <SearchScreen {...props} user={user}/>}
             </Stack.Screen>
-            <Stack.Screen name="UserProfile" component={UserProfileScreen} options={{headerShown: false}} />
+            <Stack.Screen name="UserProfile" component={UserProfileScreen} options={{headerShown: false}}/>
             <Stack.Screen name="TemplateDetails" component={TemplateDetailsScreen} options={{
                 title: '',
                 headerBackTitle: 'Back'
@@ -94,19 +96,19 @@ function LoginStack({onLogin}) {
     )
 }
 
-function SignupStack({createAccount, user}) {
+function SignupStack({createAccount, user, login}) {
     return (
         <Stack.Navigator>
-            {/*<Stack.Screen name="Signup" component={LoginScreen} options={{headerShown: false}}/>*/}
             <Stack.Screen name="Signup" component={SignupScreen} options={{
                 headerShown: false,
                 title: '',
                 headerBackTitle: 'Back'
             }}/>
-            <Stack.Screen name="Onboarding1" component={OnboardingScreen1} options={{
+            <Stack.Screen name="Verification" options={{headerShown: false}}>
+                {(props) => <VerificationScreen {...props} login={login}/>}
+            </Stack.Screen>
+            <Stack.Screen name="Setup1" component={SetupScreen1} options={{
                 headerShown: false,
-                title: '',
-                headerBackTitle: 'Back'
             }}/>
         </Stack.Navigator>
     )
@@ -141,7 +143,7 @@ function MainTabs({user, onLogout}) {
             <Tab.Screen name="Profile" options={{headerShown: false}}>
                 {(props) => <ProfileStack {...props} user={user} logout={onLogout}/>}
             </Tab.Screen>
-            <Tab.Screen name="Troves" options={{ headerShown: false}}>
+            <Tab.Screen name="Troves" options={{headerShown: false}}>
                 {(props) => <TrovesStack {...props} user={user}/>}
             </Tab.Screen>
         </Tab.Navigator>
@@ -169,18 +171,24 @@ export default function MainNavigator() {
                 <>
                     <RootStack.Screen name="Login">
                         {(props) => <LoginScreen {...props}
-                                                onLogin={(user) => {
-                                                    console.log('Hello from Main Navigator');
-                                                    setUser(user);      // Save the user here
-                                                    setIsLoggedIn(true);        // Trigger tab navigation
-                                                }}
+                                                 onLogin={(user) => {
+                                                     console.log('Hello from Main Navigator');
+                                                     setUser(user);      // Save the user here
+                                                     setIsLoggedIn(true);        // Trigger tab navigation
+                                                 }}
                         />}
                     </RootStack.Screen>
-                    <RootStack.Screen name="Signup">
+                    <RootStack.Screen name="SignupStack">
                         {(props) => <SignupStack {...props}
                                                  createAccount={(user) => {
                                                      console.log('Beginning Signup Stack');
                                                      // setIsLoggedIn(true);
+                                                 }}
+
+                                                 login={() => {
+                                                     // console.log('Hello from Main Navigator');
+                                                     // setUser(user);      // Save the user here
+                                                     setIsLoggedIn(true);        // Trigger tab navigation
                                                  }}
                         />}
                     </RootStack.Screen>

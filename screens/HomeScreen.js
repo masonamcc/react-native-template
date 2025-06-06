@@ -10,10 +10,25 @@ import {LinearGradient} from 'expo-linear-gradient';
 // import Carousel from 'react-native-reanimated-carousel';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import {Auth} from "aws-amplify";
 
 export default function HomeScreen({navigation, route, user}) {
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const user = await Auth.currentAuthenticatedUser();
+                console.log('Current user:', user);
+            } catch (err) {
+                console.log('No user signed in', err);
+            }
+        };
+
+        fetchUser();
+    }, []);
+
     const [templates, setTemplates] = useState([]);
+
     const data = [
         {id: 1, title: 'Card 1', description: 'This is the first card.'},
         {id: 2, title: 'Card 2', description: 'This is the second card.'},

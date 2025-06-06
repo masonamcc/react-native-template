@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, Button, TextInput} from 'react-native';
-import {uiStyles} from "../Styles/UIStyles";
-import {sectionStyles} from "../Styles/SectionStyles";
-import {textStyles} from "../Styles/TextStyles";
+import {uiStyles} from "../../Styles/UIStyles";
+import {sectionStyles} from "../../Styles/SectionStyles";
+import {textStyles} from "../../Styles/TextStyles";
 import {LinearGradient} from "expo-linear-gradient";
 import {TouchableOpacity} from "react-native-gesture-handler";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, initializeAuth} from "firebase/auth";
-import {app, auth, db, storage} from "../firebase";
-import {getAllUsers} from '../index'
+import {app, auth, db, storage} from "../../firebase";
+import {getAllUsers} from '../../index'
 // import './firebase'
 // import {auth} from "../firebase";
 
@@ -43,12 +43,18 @@ export default function LoginScreen({navigation, onLogin}) {
            } else {
                setErrorMessage('Please enter both username and password')
            }
-
        } catch (error) {
            console.log(error)
        }
+    };
 
-        // onLogin();  // Navigate to Home after login
+    const signIn = async (email, password) => {
+        try {
+            const user = await Auth.signIn(email, password);
+            console.log('Signed in', user);
+        } catch (err) {
+            console.error('Sign in error:', err);
+        }
     };
 
     return (
@@ -97,7 +103,7 @@ export default function LoginScreen({navigation, onLogin}) {
                         style={uiStyles.button}
                         title="Signup"
                         onPress={() => {
-                            navigation.navigate('Signup')
+                            navigation.navigate('SignupStack')
                             console.log('Sign Up button pressed')
                         }}>
                         <Text>Sign Up</Text>
