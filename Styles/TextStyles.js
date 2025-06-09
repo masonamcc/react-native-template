@@ -4,7 +4,12 @@ export const textStyles = StyleSheet.create({
     brand: {
         fontWeight: 700,
         fontSize: 20,
-        color: 'black'
+        color: 'white'
+    },
+    brandAccent: {
+        fontWeight: 800,
+        color: '#00b0ff',
+        fontFamily: 'Inter'
     },
     header1: {
         fontWeight: 900,
@@ -42,6 +47,10 @@ export const textStyles = StyleSheet.create({
         color: '#ffffff',
         marginBottom: 20
     },
+    header6: {
+        fontSize: 16
+    },
+
     description: {
         fontSize: 16,
         marginBottom: 20
@@ -73,16 +82,13 @@ export const textStyles = StyleSheet.create({
         color: '#9f9f9f',
         // marginBottom: 5
     },
-    postMessage: {
-        fontWeight: 500,
-        fontSize: 16,
-        color: '#000000',
-        paddingVertical: 10,
-        width: '95%',
-        // flex: 1
-    },
+
     searchResultUser: {
         fontSize: 16,
         fontWeight: 500
     },
+    accentText: {
+        // color: '#27dd53',
+        fontSize: 18
+    }
 })

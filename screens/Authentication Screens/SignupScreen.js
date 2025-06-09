@@ -8,18 +8,15 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword, initializeAuth} from "firebase/auth";
 import {app, auth, db, storage} from "../../firebase";
 import {createUser} from "../../index";
-import SetupScreen1 from "../Setup Screens/SetupScreen1";
+import Setup1Username from "../Setup Screens/Setup1Username";
 // import './firebase'
 // import {auth} from "../firebase";
 import {Auth} from 'aws-amplify';
 
 export default function SignupScreen({navigation, onLogin}) {
 
-    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState('')
 
@@ -42,24 +39,25 @@ export default function SignupScreen({navigation, onLogin}) {
             navigation.navigate('Verification', {email})
         } catch (err) {
             console.error('Error signing up:', err);
-            setErrorMessage(err[0])
+            setErrorMessage(err.message)
         }
     };
 
     return (
-        <SafeAreaView style={sectionStyles.loginSection}>
+        <SafeAreaView style={sectionStyles.signUp}>
 
+            <View></View>
 
-            <View style={sectionStyles.loginMiddle}>
+            <View style={sectionStyles.signUpMiddle}>
 
-                <Text style={[{fontWeight: 500, marginBottom: 10, fontSize: 25, color: '#000000'}]}>Sign Up</Text>
+                <Text style={[{fontWeight: 500, marginBottom: 10, fontSize: 25, color: '#000'}]}>Sign up for <Text style={textStyles.brandAccent}>trove</Text></Text>
 
                 <TextInput
                     style={uiStyles.input}
                     placeholder="Enter your email"
                     // placeholderTextColor={'rgba(255,255,255,.5)'}
                     value={email}
-                    onChangeText={setEmail}
+                    onChangeText={(input) => setEmail(input.toLowerCase().trim())}
                 />
 
                 <TextInput
@@ -85,7 +83,7 @@ export default function SignupScreen({navigation, onLogin}) {
                 ) : null}
 
                 <TouchableOpacity
-                    style={uiStyles.button}
+                    style={uiStyles.buttonAccent}
                     title="Signup"
                     onPress={() => {
                         // navigation.navigate('SignupB')
@@ -95,17 +93,17 @@ export default function SignupScreen({navigation, onLogin}) {
                         } else if ((email && password && confirmPassword) && password === confirmPassword) {
                             // console.log('Creating new account for: ', username)
                             signUp(email, password);
-                            navigation.navigate('Verification', {email})
                             // onLogin
 
                         } else if (password !== confirmPassword) {
+                            setErrorMessage('Passwords do not match')
                             console.log('Passwords do not match')
                         }
                     }}>
-                    <Text>Create Account</Text>
+                    <Text style={{color: 'white'}}>Create Account</Text>
                 </TouchableOpacity>
 
-                <Text style={{marginTop: 10, color: 'white'}}
+                <Text style={{marginTop: 10, color: 'black'}}
                       onPress={() => {
                           navigation.navigate('Login')
                       }}>

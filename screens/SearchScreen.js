@@ -3,15 +3,16 @@ import {LinearGradient} from "expo-linear-gradient";
 import {uiStyles} from "../Styles/UIStyles";
 import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {textStyles} from "../Styles/TextStyles";
-import {getAllTemplates, getAllUsers} from "../index";
+import {getAllTemplates, getAllUsers, searchAllUsers} from "../index";
 import {sectionStyles} from "../Styles/SectionStyles";
 import {gridStyles} from "../Styles/GridStyles";
 import {Pressable} from "react-native-gesture-handler";
 
-export default function SearchScreen({navigation, route, user}) {
+export default function SearchScreen({navigation, route, dbUser}) {
 
     const [searchQuery, setSearchQuery] = useState('')
     const [searchQueryResults, setSearchQueryResults] = useState('')
+    const [searchedUsername, setSearchedUsername] = useState('')
 
     useEffect(() => {
 
@@ -21,7 +22,7 @@ export default function SearchScreen({navigation, route, user}) {
             if (searchQuery === '') {
 
             } else {
-                const allUsers = await getAllUsers();
+                const allUsers = await searchAllUsers();
                 const searchResults = allUsers.filter(user => user.username.includes(searchQuery.toLowerCase()));
                 console.log('Found: ', searchResults);
                 setSearchQueryResults(searchResults)
@@ -70,7 +71,7 @@ export default function SearchScreen({navigation, route, user}) {
                             <Pressable
                                 key={index}
                                 onPress={() => {
-                                    navigation.navigate('UserProfile', {searchQueryResult})
+                                    navigation.navigate('UserProfile', {username: searchQueryResult.username})
                                 }}>
                                 <View key={index} style={uiStyles.searchResultContainer}>
                                     <View style={uiStyles.smallProfilePicture}/>

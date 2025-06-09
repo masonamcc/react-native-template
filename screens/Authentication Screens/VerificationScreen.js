@@ -8,7 +8,7 @@ import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword, initializeAuth} from "firebase/auth";
 import {app, auth, db, storage} from "../../firebase";
 import {createUser} from "../../index";
-import SetupScreen1 from "../Setup Screens/SetupScreen1";
+import Setup1Username from "../Setup Screens/Setup1Username";
 // import './firebase'
 // import {auth} from "../firebase";
 import {Auth} from 'aws-amplify';
@@ -18,13 +18,14 @@ export default function VerificationScreen({navigation, route, login}) {
     const [verificationCode, setVerificationCode] = useState('');
 
     const {email} = route.params;
-    console.log('Received Email: ', email)
 
     const confirmSignUp = async (email, verificationCode) => {
         try {
             await Auth.confirmSignUp(email, verificationCode);
             console.log('Confirmation success');
-            navigation.navigate('Setup1')
+            navigation.navigate('Setup1', {
+                email: email
+            })
         } catch (err) {
             console.error('Confirmation error:', err);
         }
@@ -45,14 +46,14 @@ export default function VerificationScreen({navigation, route, login}) {
 
             <View></View>
 
-            <View style={sectionStyles.loginMiddle}>
+            <View style={sectionStyles.signUpMiddle}>
                 <Text style={[{fontWeight: 500, marginBottom: 12, fontSize: 25}]}>Verification</Text>
                 <Text style={{marginBottom: 20}}>Please enter the verification code we sent to your email.</Text>
 
                 <TextInput
                     style={uiStyles.input}
                     placeholder="Verification Code"
-                    placeholderTextColor={'rgba(255,255,255,.5)'}
+                    placeholderTextColor={'rgba(0,0,0,.5)'}
                     value={verificationCode}
                     onChangeText={setVerificationCode}
                 />

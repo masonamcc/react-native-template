@@ -10,12 +10,15 @@ import {app, auth, db, storage} from "../../firebase";
 import {getAllUsers} from '../../index'
 // import './firebase'
 // import {auth} from "../firebase";
+import {Auth} from 'aws-amplify';
 
 export default function LoginScreen({navigation, onLogin}) {
 
-    const [username, setUsername] = useState('');
+    // const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('')
+    const [dbUser, setDbUser] = useState('');
 
     const handleLogin = async (usernameInput, password) => {
        try {
@@ -51,8 +54,15 @@ export default function LoginScreen({navigation, onLogin}) {
     const signIn = async (email, password) => {
         try {
             const user = await Auth.signIn(email, password);
-            console.log('Signed in', user);
+            console.log('Signed in', user.attributes.email);
+            onLogin()
         } catch (err) {
+            console.log('Err object: ', err.message)
+            if (err.message === 'User does not exist.') {
+                setErrorMessage("We can't find a user with that email.")
+            } else if (err.message === 'Incorrect username or password.') {
+                setErrorMessage("Incorrect username or password.")
+            }
             console.error('Sign in error:', err);
         }
     };
@@ -71,10 +81,10 @@ export default function LoginScreen({navigation, onLogin}) {
 
                     <TextInput
                         style={uiStyles.input}
-                        placeholder="Username"
+                        placeholder="Email"
                         placeholderTextColor={'#373737'}
-                        value={username}
-                        onChangeText={setUsername}
+                        value={email}
+                        onChangeText={(input) => setEmail(input.toLowerCase().trim())}
                     />
 
                     <TextInput
@@ -91,12 +101,12 @@ export default function LoginScreen({navigation, onLogin}) {
                     ) : null}
 
                     <Text style={{marginTop: 10}} onPress={() => {
-                        handleLogin(username, password)}}>
+                        signIn(email, password)}}>
                         Login
                     </Text>
 
                     <Text style={{marginTop: 10}}>
-                        Already have an account?
+                        Don't have an account?
                     </Text>
 
                     <TouchableOpacity

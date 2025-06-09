@@ -10,11 +10,11 @@ registerRootComponent(App);
 
 
 export const getAllTemplates = async () => {
-    console.log('Getting all templates')
+    // console.log('Getting all templates')
     let response = await fetch('http://192.168.1.119:9090/templates');
     let templates = await response.json();
     templates.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-    console.log(templates)
+    // console.log(templates)
     return Array.isArray(templates) ? templates : [];
 
     // if (!templates || templates.length === 0) {
@@ -34,16 +34,29 @@ export const getAllTroves = async () => {
     console.log('Getting all Troves')
     let response = await fetch('http://192.168.1.119:9090/troves');
     let troves = await response.json();
-    troves.sort((a,b) => new Date(b.troveCreatedTimestamp) - new Date(a.troveCreatedTimestamp));
+    troves.sort((a, b) => new Date(b.troveCreatedTimestamp) - new Date(a.troveCreatedTimestamp));
     console.log(troves)
     return Array.isArray(troves) ? troves : [];
 }
 
+
+
 export const getAllUsers = async () => {
     const users = await fetch('http://192.168.1.119:9090/users')
     const allUsers = await users.json();
-    // console.log('All Users: ' + allUsers)
-    return Array.isArray(allUsers) ? allUsers : [];
+    return Array.isArray(allUsers) ? allUsers : []
+}
+
+export const searchAllUsers = async () => {
+    const users = await fetch('http://192.168.1.119:9090/users/search')
+    const allUsers = await users.json();
+    return Array.isArray(allUsers) ? allUsers : []
+}
+
+export const getUserFromDb = async (email) => {
+    const users = await fetch('http://192.168.1.119:9090/users')
+    const allUsers = await users.json();
+    return allUsers.find(user => user.email === email)
 }
 
 export const createUser = async (username, password) => {
@@ -54,7 +67,6 @@ export const createUser = async (username, password) => {
     if (searchedUser) {
         console.log('User already exists')
     }
-
 
 
     // console.log('Creating New User with username: ', username, ' and password: ', password);
@@ -84,34 +96,43 @@ export const createUser = async (username, password) => {
     // }
 }
 
+
+
 // Posts
 
 export const createPost = async (user, post) => {
-    console.log('Creating a new post - User: ', user, ' / Post: ', post)
-    const createPost = await fetch('http://192.168.1.119:9090/createPost', {
+    console.log('Creating a new post');
+
+    const response = await fetch('http://192.168.1.119:9090/createPost', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             user: {
-                userId: user.userId
+                userId: user.userId,
             },
             body: post,
             title: null,
-            timestamp: new Date().toISOString()
-        })
+            timestamp: new Date().toISOString(),
+        }),
     });
-    const response = await createPost.text();
-    console.log('Response: ', response)
-    await getMyPosts()
-}
+
+    if (!response.ok) {
+        throw new Error('Failed to create post');
+    }
+
+    const text = await response.text(); // Optional
+    console.log('Server response:', text);
+    return text;
+};
+
 
 export const getMyPosts = async (user) => {
-    console.log('getMyPosts initiated... user: ', user.username, ' ', user.userId)
+    // console.log('getMyPosts initiated... user: ', user.username, ' ', user.userId)
     const response = await fetch(`http://192.168.1.119:9090/posts/user/${user.userId}`)
     const myPosts = await response.json();
-    console.log('getMyPosts initiated... my posts: ', myPosts)
+    // console.log('getMyPosts initiated... my posts: ', myPosts)
     myPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
     // console.log('My Posts: ', myPosts)
     return Array.isArray(myPosts) ? myPosts : [];

@@ -1,24 +1,32 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, ScrollView, StyleSheet, SafeAreaView, TextInput} from 'react-native';
-import {getAllTemplates} from '../index';
+import React, {use, useEffect, useState} from 'react';
+import {View, Text, ScrollView, StyleSheet, SafeAreaView, TextInput, Button} from 'react-native';
+import {getAllTemplates, getUserFromDb} from '../index';
 import {textStyles} from '../Styles/TextStyles.js';
 import {sectionStyles} from '../Styles/SectionStyles.js';
 import {gridStyles} from '../Styles/GridStyles.js';
 import {uiStyles} from '../Styles/UIStyles.js';
+import {troveStyles} from "../Styles/TroveStyles";
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {LinearGradient} from 'expo-linear-gradient';
 // import Carousel from 'react-native-reanimated-carousel';
+// import {Navigation} from "swiper/modules";
+import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Auth} from "aws-amplify";
+import StingerTransition from "../Stingers/Stinger_Flame";
+import {useVideoPlayer, VideoView} from "expo-video";
 
-export default function HomeScreen({navigation, route, user}) {
+export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const user = await Auth.currentAuthenticatedUser();
-                console.log('Current user:', user);
+                const userEmail = user.attributes.email
+                const loggedInUser = await getUserFromDb(userEmail);
+                console.log('Logged in user: ', loggedInUser)
+                setDbUser(loggedInUser);
             } catch (err) {
                 console.log('No user signed in', err);
             }
@@ -28,14 +36,6 @@ export default function HomeScreen({navigation, route, user}) {
     }, []);
 
     const [templates, setTemplates] = useState([]);
-
-    const data = [
-        {id: 1, title: 'Card 1', description: 'This is the first card.'},
-        {id: 2, title: 'Card 2', description: 'This is the second card.'},
-        {id: 3, title: 'Card 3', description: 'This is the third card.'},
-    ];
-
-    console.log('Logged in as ', user)
 
     const Card = ({title, description}) => {
         return (
@@ -74,7 +74,7 @@ export default function HomeScreen({navigation, route, user}) {
         const fetchTemplates = async () => {
             const data = await getAllTemplates();
             data.forEach(dataPoint => {
-                console.log('This data is called, ', dataPoint.templateTitle)
+                // console.log('This data is called, ', dataPoint.templateTitle)
             })
 
             setTemplates(data);
@@ -102,7 +102,7 @@ export default function HomeScreen({navigation, route, user}) {
                 </View>
             </View>
 
-            <ScrollView style={{width: '100%', backgroundColor: '#e5e5e5'}}>
+            <ScrollView style={{width: '100%', height: '100%', backgroundColor: '#e5e5e5'}}>
 
                 <ScrollView style={{width: '100%'}}>
                     <View style={sectionStyles.sectionA}>

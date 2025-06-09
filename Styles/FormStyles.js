@@ -14,13 +14,13 @@ export const formStyles = StyleSheet.create({
         width: '100%',
         borderColor: 'white',
         borderWidth: 1,
-        marginBottom: 15,
+        // marginBottom: 15,
         borderRadius: 20,
         padding: 20,
         // paddingHorizontal: 10,
         color: '#373737',
         backgroundColor: '#f1f1f1',
-        fontSize: 30
+        fontSize: 20
     },
     inputMedium: {
         height: 200,
