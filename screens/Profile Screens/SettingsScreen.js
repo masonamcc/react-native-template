@@ -5,11 +5,12 @@ import {Pressable} from "react-native-gesture-handler";
 import {uiStyles} from "../../Styles/UIStyles";
 import {Auth} from 'aws-amplify';
 import {Video} from "expo-av";
+import {updateUser} from "../../RESTFunctions/UserRESTFunctions";
 
-export default function SettingsScreen({route, logout, user, profileBackgroundEnabled, setProfileBackgroundEnabled}) {
+export default function SettingsScreen({route, logout, user, profileBackgroundEnabled, setProfileBackgroundEnabled, dataChanged, setDataChanged, dbUser, profileBackgroundLink, setProfileBackgroundLink}) {
     // const [templates, setTemplates] = useState([]);
 
-    const [profileBackgroundLink, setProfileBackgroundLink] = useState('')
+    // const [profileBackgroundLink, setProfileBackgroundLink] = useState('')
     const toggleProfileBackground = () => setProfileBackgroundEnabled((prev) => !prev)
 
     const signOut = async () => {
@@ -22,33 +23,53 @@ export default function SettingsScreen({route, logout, user, profileBackgroundEn
         }
     };
 
-    useEffect(() => {
-        console.log(profileBackgroundLink)
-    }, [profileBackgroundLink]);
+    const handleGoogleDriveLink = (input) => {
+        const linkArray = input.split("/");
+        console.log('Link Array: ', linkArray)
+        const fileId = linkArray[5];
+        console.log('FileId: ', fileId)
+        const fixedUri = `https://drive.google.com/uc?export=download&id=${fileId}`
+        return fixedUri;
+    }
+
+    // const updateUser = async(profileBackgroundLink, dbUser) => {
+    //     await updateUser(profileBackgroundLink, dbUser)
+    // }
+    //
+    // useEffect(() => {
+    //     console.log(profileBackgroundLink)
+    // }, [profileBackgroundLink]);
 
 
     return (
         <SafeAreaView style={styles.safeView}>
             {/*<Text style={styles.title}>TROVE</Text>*/}
             <ScrollView style={{width: '100%'}}>
-                <Text>Profile Appearance Settings</Text>
-                <Text>Toggle Profile Background</Text>
 
-                <Text>Set Profile Background</Text>
-                <TextInput style={uiStyles.genericInput}
-                   value={profileBackgroundLink}
-                   onChangeText={setProfileBackgroundLink}
-                />
+                <View style={uiStyles.menuItemContainerInput}>
+                    <Text style={uiStyles.menuItemTitle}>Set Profile Background</Text>
+                    <Text style={uiStyles.menuItemTitle}>Google Drive Link</Text>
+                    <Text style={uiStyles.menuItemDescription}>Ensure that the Google Drive file you'd like to save as your background has General Access set to "Anyone with the link"</Text>
+                    <TextInput style={uiStyles.genericInput}
+                               placeholder={'Google Drive Link'}
+                               placeholderTextColor={'#9a9a9a'}
+                               value={profileBackgroundLink}
+                               onChangeText={(input) => {
+                                   setProfileBackgroundLink(handleGoogleDriveLink(input))
 
-                {profileBackgroundLink && (
-                    <Video
-                        source={{uri: profileBackgroundLink}}
-                        style={uiStyles.profileBackgroundVideoPreview}
-                        resizeMode="cover"
-                        shouldPlay={true}
-                        isLooping
+                               }}
                     />
-                )}
+
+                    {profileBackgroundLink && (
+                        <Video
+                            source={{uri: profileBackgroundLink}}
+                            style={uiStyles.profileBackgroundVideoPreview}
+                            resizeMode="fit"
+                            shouldPlay={true}
+                            isLooping={true}
+                        />
+                    )}
+                </View>
 
                 {/*<Pressable*/}
                 {/*    style={uiStyles.button}*/}

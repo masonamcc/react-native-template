@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { useVideoPlayer, VideoView } from 'expo-video';
+import { useVideoPlayer, VideoView } from 'expo-av';
 import { useEvent } from 'expo';
 
 export default function StingerTransition({ onFinish }) {

@@ -5,7 +5,8 @@ export const createPostStyles = StyleSheet.create({
         alignItems: 'left',
         justifyContent: 'left',
         flex: 1,
-        padding: 20
+        padding: 20,
+        height: 50
     },
     postHeader: {
         justifyContent: 'space-between',

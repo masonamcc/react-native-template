@@ -3,15 +3,27 @@ import {registerRootComponent} from 'expo';
 // import 'expo-router/entry';
 import App from './App';
 
+
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
 // the environment is set up appropriatelyn
 registerRootComponent(App);
+export const ip = '192.168.1.119'
 
+function currentIP() {
+    fetch('https://api.iplocation.net/?cmd=get-ip')
+
+        .then(response => response.json())
+        .then(data => {
+            console.log("Public IP Address:", data);
+        });
+}
+
+currentIP();
 
 export const getAllTemplates = async () => {
     // console.log('Getting all templates')
-    let response = await fetch('http://192.168.1.119:9090/templates');
+    let response = await fetch(`http://${ip}:9090/templates`);
     let templates = await response.json();
     templates.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
     // console.log(templates)
@@ -32,31 +44,37 @@ export const getAllTemplates = async () => {
 
 export const getAllTroves = async () => {
     console.log('Getting all Troves')
-    let response = await fetch('http://192.168.1.119:9090/troves');
+    let response = await fetch(`http://${ip}:9090/troves`);
     let troves = await response.json();
     troves.sort((a, b) => new Date(b.troveCreatedTimestamp) - new Date(a.troveCreatedTimestamp));
     console.log(troves)
     return Array.isArray(troves) ? troves : [];
 }
 
-
-
 export const getAllUsers = async () => {
-    const users = await fetch('http://192.168.1.119:9090/users')
+    const users = await fetch(`http://${ip}:9090/users`)
     const allUsers = await users.json();
     return Array.isArray(allUsers) ? allUsers : []
 }
 
 export const searchAllUsers = async () => {
-    const users = await fetch('http://192.168.1.119:9090/users/search')
+    const users = await fetch(`http://${ip}:9090/users/search`)
     const allUsers = await users.json();
     return Array.isArray(allUsers) ? allUsers : []
 }
 
 export const getUserFromDb = async (email) => {
-    const users = await fetch('http://192.168.1.119:9090/users')
+    console.log('Getting user form database: ', email)
+    console.log(`http://${ip}:9090/createUser`)
+    const users = await fetch(`http://${ip}:9090/users`)
     const allUsers = await users.json();
     return allUsers.find(user => user.email === email)
+}
+
+export const getUserFromDbById = async (userId) => {
+    const users = await fetch(`http://${ip}:9090/users`)
+    const allUsers = await users.json();
+    return allUsers.find(user => user.userId === userId)
 }
 
 export const createUser = async (username, password) => {
@@ -70,7 +88,7 @@ export const createUser = async (username, password) => {
 
 
     // console.log('Creating New User with username: ', username, ' and password: ', password);
-    // let response = await fetch('http://192.168.1.119:9090/createUser', {
+    // let response = await fetch('http://${ip}:9090/createUser', {
     //     method: 'POST',
     //     headers: {
     //         'Content-Type': 'application/json'
@@ -99,11 +117,10 @@ export const createUser = async (username, password) => {
 
 
 // Posts
-
 export const createPost = async (user, post) => {
     console.log('Creating a new post');
 
-    const response = await fetch('http://192.168.1.119:9090/createPost', {
+    const response = await fetch(`http://${ip}:9090/createPost`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -127,10 +144,9 @@ export const createPost = async (user, post) => {
     return text;
 };
 
-
 export const getMyPosts = async (user) => {
     // console.log('getMyPosts initiated... user: ', user.username, ' ', user.userId)
-    const response = await fetch(`http://192.168.1.119:9090/posts/user/${user.userId}`)
+    const response = await fetch(`http://${ip}:9090/posts/user/${user.userId}`)
     const myPosts = await response.json();
     // console.log('getMyPosts initiated... my posts: ', myPosts)
     myPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))

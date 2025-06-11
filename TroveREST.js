@@ -1,8 +1,10 @@
 // Users
+import {ip} from "./index"
 
 export const createDbUser = async (email, username, bio, firstName, lastName) => {
     console.log('Creating dbUser...')
-    let response = await fetch('http://192.168.1.119:9090/createUser', {
+
+    let response = await fetch(`http://${ip}:9090/createUser`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -92,7 +92,7 @@ export default function BrowseTrovesScreen({navigation, user, dbUser}) {
 
                 {/* Images Grid */}
                 <ScrollView contentContainerStyle={{flexDirection: 'row', flexWrap: 'wrap', padding: 10}}>
-                    <View style={troveStyles.troveListingContainer}>
+                    <View style={uiStyles.troveListingContainer}>
                         {allTroves ? (
                             allTroves.map((trove, index) => {
                                 fetchTroveCreator(trove.userId)
@@ -100,7 +100,7 @@ export default function BrowseTrovesScreen({navigation, user, dbUser}) {
                                 return (
                                     <Pressable
                                         key={index}
-                                        style={troveStyles.troveListing}
+                                        style={uiStyles.troveListing}
                                         onPress={() => {
                                             navigation.navigate('TroveDetailsScreen', {trove})
                                         }}
@@ -108,7 +108,7 @@ export default function BrowseTrovesScreen({navigation, user, dbUser}) {
                                         <View>
 
                                             {/*<Text style={troveStyles.troveListingTitle}>{troveCreator.id}</Text>*/}
-                                            <Text style={troveStyles.troveListingTitle}>{trove.troveTitle}</Text>
+                                            <Text style={uiStyles.troveListingTitle}>{trove.troveTitle}</Text>
                                             <Text style={{marginBottom: 10}}>{trove.troveDescription}</Text>
                                             {/*<Text style={{fontSize: 10}}>*/}
                                             {/*    Date Added: {new Date(myTrove.timestamp).toLocaleDateString()}*/}

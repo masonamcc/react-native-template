@@ -30,7 +30,7 @@ import {createTrove} from "../../RESTFunctions/TroveRESTFunctions";
 import {Video} from "expo-av";
 
 
-export default function CreateTroveScreen({navigation, user, dbUser}) {
+export default function CreateTroveScreen({navigation, user, dbUser, dataChanged, setDataChanged}) {
 
     const [troveTitle, setTroveTitle] = useState('')
     const [troveDescription, setTroveDescription] = useState('')
@@ -116,16 +116,11 @@ export default function CreateTroveScreen({navigation, user, dbUser}) {
     };
 
     const addNewTrove = async () => {
-        console.log('From React')
-        console.log(troveTitle)
-        console.log(assetType)
-        console.log(assetFile)
-        console.log(troveDescription)
-        console.log(dbUser)
-        const newTrove = createTrove(troveTitle, assetType, assetFile, troveDescription, dbUser)
+        const newTrove = await createTrove(troveTitle, assetType, assetFile, troveDescription, dbUser)
         const newTroveResponse = await newTrove.json()
-        if (newTroveResponse.ok()) {
-            navigation.goBack()
+        console.log('Response from API: ', newTrove)
+        if (newTrove.ok) {
+            navigation.goBack(setDataChanged(true))
         }
         // console.log(newTroveResponse)
 

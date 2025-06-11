@@ -1,5 +1,6 @@
 import {Dimensions, StyleSheet} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+
 const screenHeight = Dimensions.get('window').height;
 import safeAreaView from "react-native";
 
@@ -7,20 +8,13 @@ import safeAreaView from "react-native";
 export const uiStyles = StyleSheet.create({
     header: {
         width: '100%',
-        height: 30,
-        // backgroundColor: 'red',
+        height: 'auto',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'space-between',
-        // display: "flex",
         flexDirection: 'row',
-        // paddingHorizontal: 20,
-        // // paddingBottom: 10,
-        // // paddingLeft: 20,
-        // // paddingRight: 20,
-        // borderBottomWidth: 1,
-        // borderBottomColor: '#e5e5e5'
-        // position: 'relative',
         top: 0,
+        paddingBottom: 20,
         paddingHorizontal: 20
     },
     header1: {
@@ -40,7 +34,7 @@ export const uiStyles = StyleSheet.create({
         fontWeight: 700,
         // fontStyle: "italic",
         fontSize: 20,
-        color: 'white'
+        color: 'black'
     },
     profileMyName: {
         fontWeight: 500,
@@ -120,6 +114,7 @@ export const uiStyles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 10,
         color: '#373737',
+        padding: 20
         // justifyContent: 'left'
     },
     // Buttons
@@ -151,17 +146,16 @@ export const uiStyles = StyleSheet.create({
         fontSize: 16
     },
 
+    // Contains all posts
     masterPostContainer: {
-        backgroundColor: 'white',
-        flex: 1,
         flexDirection: 'row',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        height: 'auto',
     },
     //Post elements
     postFeed: {
         width: '100%',
         height: 'auto',
-        // backgroundColor: 'red',
     },
     spotlightContainer: {
         width: '25%',
@@ -170,7 +164,7 @@ export const uiStyles = StyleSheet.create({
     },
     spotlight: {
         width: '100%',
-        aspectRatio: 9/16,
+        aspectRatio: 9 / 16,
         marginRight: 20,
         backgroundColor: 'white',
         borderRadius: 20,
@@ -207,50 +201,68 @@ export const uiStyles = StyleSheet.create({
         borderRadius: 8,
         width: 'auto'
     },
+
     // The individual post containers
     postContainer: {
-        // borderBottomWidth: 1,
-        // borderColor: '#e5e5e5',
-        borderRadius: 10,
-        padding: 20,
-        // marginRight: 10,
         marginBottom: 10,
         flexDirection: 'row',
-        maxWidth: '100%',
-        flex: 1,
-        // backgroundColor: 'rgba(0,0,0,0)',
-        backgroundColor: 'white',
+        height: 'auto',
     },
+
     // Containing all elements of the post
     postBodyContainer: {
-        // backgroundColor: 'red',
-        // width: '100%'
+        height: 'auto',
         flex: 1
     },
+
     // The header of the post
     postHeaderBar: {
+        height: 'auto',
+        // width: '100%',
         flexDirection: 'row',
-        flex: 1,
+        // flex: 1,
         justifyContent: 'space-between',
-        alignItems: 'start'
+        alignItems: 'start',
     },
+
     // The mess
     postBody: {
         flexDirection: 'column',
+        width: 'auto',
+        height: 'auto',
+        // flex: 1,
+        // justifyContent: 'space-between',
+        marginTop: 10,
+    },
+
+    // Create Post
+    createPostContainer: {
+        paddingHorizontal: 20
+    },
+
+    createPostHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+
+    createPostBody: {
+        flexDirection: 'row',
         width: 'auto',
         flex: 1,
         justifyContent: 'space-between',
         marginTop: 10,
         // backgroundColor: 'red'
     },
-    // The footer of the post
-    postFooter: {
 
-    },
+
+    // The footer of the post
+    postFooter: {},
     postEngagementView: {
         marginBottom: 10,
         flexDirection: 'row',
     },
+
     postMessage: {
         fontWeight: 400,
         fontSize: 16,
@@ -261,6 +273,7 @@ export const uiStyles = StyleSheet.create({
         // flex: 1
     },
 
+
     newTroveButton: {
         backgroundColor: 'black',
         paddingTop: 10,
@@ -268,6 +281,8 @@ export const uiStyles = StyleSheet.create({
         paddingHorizontal: 25,
         borderRadius: 8,
     },
+
+
 
     // Profile Elements
     profileHeader: {
@@ -287,7 +302,7 @@ export const uiStyles = StyleSheet.create({
     profileHeaderContainer: {
         justifyContent: 'center',
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     profileIdentityContainer: {
         flexDirection: 'row',
@@ -310,37 +325,39 @@ export const uiStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+
     activeTabContentContainer: {
-        height: '100%',
+        height: 'auto',
         width: '100%',
-        flex: 1,
+        // flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         flexDirection: 'column',
         display: 'flex',
-        // backgroundColor: 'blue'
+        // backgroundColor: 'red',
+        paddingBottom: 100,
+        paddingTop: 3
     },
     activeTabContentHeader: {
-        height: '100%',
+        // height: 'auto',
         width: '100%',
-        flex: 1,
+        // flex: 1,
         flexDirection: 'row',
         display: 'flex',
         justifyContent: 'space-between',
         padding: 20,
         gap: 10,
-        backgroundColor: 'white'
+        // backgroundColor: 'red'
     },
     activeTabContentHeaderItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        // padding: 20,
-        backgroundColor: 'white',
-        flex: 1,
-        // width: '100%',
+        justifyContent: 'flex-start',
         borderWidth: 1,
         borderColor: '#e5e5e5',
         borderRadius: 50,
         padding: 10,
+        paddingHorizontal: 20
     },
     activeTabContentHeaderItemText: {
         color: 'black',
@@ -360,7 +377,7 @@ export const uiStyles = StyleSheet.create({
         alignItems: 'center'
     },
     profilePicture: {
-        width: 125,
+        width: 100,
         // height: 100,
         aspectRatio: 1,
         borderRadius: 200,
@@ -400,10 +417,11 @@ export const uiStyles = StyleSheet.create({
         width: '100%'
     },
     horizontalNavContainer: {
-        // height: 25,
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'start',
-        padding: 20
+        padding: 20,
+        // backgroundColor: 'orange'
     },
     horizontalNavItem: {
         backgroundColor: 'rgba(0,0,0,.5)',
@@ -438,21 +456,21 @@ export const uiStyles = StyleSheet.create({
         alignItems: 'center'
     },
     backgroundVideoContainer: {
-        height: '50%',
+        height: '100%',
         width: '100%',
         position: 'absolute',
         zIndex: -1,
-        // flex: 1
-        top: 0
+        top: 0,
+        backgroundColor: 'white'
     },
     backgroundVideo: {
         height: '100%',
         width: '100%',
-
+        backgroundColor: 'white'
     },
     profileBackgroundVideoPreview: {
         height: 200,
-        aspectRatio: 9/16,
+        aspectRatio: 9 / 16,
         borderWidth: 1,
         borderColor: '#e5e5e5',
         zIndex: -1,
@@ -472,7 +490,14 @@ export const uiStyles = StyleSheet.create({
     menuItemContainer: {
         justifyContent: "space-between",
         flexDirection: 'row',
-
+        width: '100%',
+        borderTopWidth: 1,
+        borderColor: '#e5e5e5',
+        padding: 20
+    },
+    menuItemContainerInput: {
+        justifyContent: "space-between",
+        flexDirection: 'column',
         width: '100%',
         borderTopWidth: 1,
         borderColor: '#e5e5e5',
@@ -489,6 +514,7 @@ export const uiStyles = StyleSheet.create({
     menuItemDescription: {
         color: '#9a9a9a',
         fontSize: 14,
+        marginBottom: 10
     },
 
     // Columns
@@ -516,6 +542,68 @@ export const uiStyles = StyleSheet.create({
         height: '100%',
         gap: 10
     },
+
+    // Contains my troves
+    troveListingContainer: {
+        backgroundColor: 'white',
+        // height: '100%',
+        width: '99%',
+        // padding: 20,
+        flex: 1,
+        flexDirection: 'row',
+        padding: 1,
+        justifyContent: 'center'
+    },
+    troveListing: {
+        // height: 200,
+        maxWidth: '33%',
+        aspectRatio: 9/16,
+        backgroundColor: 'blue',
+        marginRight: 1,
+        // alignItems: 'bottom',
+        // marginBottom: 10,
+        // borderColor: '#e5e5e5',
+        borderWidth: 1,
+        // borderRadius: 10,
+        padding: 10,
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+    troveListingCover: {
+        // height: '100%',
+        flex: 1,
+        // top:10
+        // backgroundColor: 'red',
+        position: 'absolute'
+    },
+    troveListingFooter: {
+        flexDirection: 'row',
+        justifyContent: "flex-end"
+    },
+    troveListingTitle: {
+        fontSize: 12,
+        fontWeight: 700
+    },
+    troveBannerImagePreview: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        // height: 200,
+        // padding: 100,
+        backgroundColor: '#e5e5e5',
+        borderRadius: 25,
+        aspectRatio: 16 / 9,
+    },
+    troveSectionHeader: {
+        alignItems: 'center',
+        width: '100%',
+        justifyContent: 'center',
+        marginBottom: 20
+    },
+    troveSectionHeaderText: {
+        fontSize: 25,
+        fontWeight: 700,
+    },
     troveScrollView: {
         height: screenHeight
     },
@@ -533,7 +621,7 @@ export const uiStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        aspectRatio: 9/16,
+        aspectRatio: 9 / 16,
         // padding: 100,
         backgroundColor: '#e5e5e5',
         // borderRadius: 25
@@ -563,7 +651,7 @@ export const uiStyles = StyleSheet.create({
     troveDetailsHeroContainer: {
         // alignItems: 'center',
         height: '100%',
-        // backgroundColor: 'blue',
+        // backgroundColor: 'green',
         padding: 20,
         justifyContent: 'flex-end',
         // flex: 1
@@ -575,10 +663,20 @@ export const uiStyles = StyleSheet.create({
         // backgroundColor: 'blue',
         justifyContent: 'center'
     },
+    troveDetailsHeroFooter: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        // alignItems: 'center'
+    },
     troveDetailsContentContainer: {
         justifyContent: 'center',
         minHeight: 150,
         padding: 20,
-        backgroundColor: 'red'
+        backgroundColor: 'white'
+    },
+
+    troveFullscreenToggle: {
+        // backgroundColor: 'red',
+        height: 'auto'
     }
 })

@@ -55,26 +55,40 @@ function HomeStack({dbUser, setDbUser}) {
     );
 }
 
-function ProfileStack({dbUser, setDbUser, logout}) {
-    const [profileBackgroundEnabled, setProfileBackgroundEnabled] = useState(true);
+function ProfileStack({dbUser, setDbUser, logout, dataChanged, setDataChanged}) {
+    const [profileBackgroundEnabled, setProfileBackgroundEnabled] = useState(false);
+    const [profileBackgroundLink, setProfileBackgroundLink] = useState('')
     return (
         <Stack.Navigator>
 
             <Stack.Screen name="MyProfileScreen" options={{headerShown: false}}>
-                {(props) => <MyProfileScreen {...props} dbUser={dbUser} profileBackgroundEnabled={profileBackgroundEnabled}
-                                             setProfileBackgroundEnabled={setProfileBackgroundEnabled}/>}
+                {(props) => <MyProfileScreen {...props}
+                                             dbUser={dbUser}
+                                             profileBackgroundEnabled={profileBackgroundEnabled}
+                                             setProfileBackgroundEnabled={setProfileBackgroundEnabled}
+                                             profileBackgroundLink = {profileBackgroundLink}
+                                             setProfileBackgroundLink = {setProfileBackgroundLink}
+                                             dataChanged={dataChanged}
+                                             setDataChanged={setDataChanged}/>}
             </Stack.Screen>
 
             <Stack.Screen name="CreatePostScreen" options={{headerShown: false}}>
-                {(props) => <CreatePostScreen {...props} dbUser={dbUser}/>}
+                {(props) => <CreatePostScreen {...props} dbUser={dbUser} dataChanged={dataChanged} setDataChanged={setDataChanged}/>}
             </Stack.Screen>
 
             <Stack.Screen name="Settings" options={{
                 title: '',
                 headerBackTitle: 'Back'
             }}>
-                {(props) => <SettingsScreen {...props} dbUser={dbUser} logout={logout} profileBackgroundEnabled={profileBackgroundEnabled}
-                                            setProfileBackgroundEnabled={setProfileBackgroundEnabled}/>}
+                {(props) => <SettingsScreen {...props}
+                                            dbUser={dbUser}
+                                            logout={logout}
+                                            profileBackgroundEnabled={profileBackgroundEnabled}
+                                            setProfileBackgroundEnabled={setProfileBackgroundEnabled}
+                                            profileBackgroundLink = {profileBackgroundLink}
+                                            setProfileBackgroundLink = {setProfileBackgroundLink}
+                                            dataChanged={dataChanged}
+                                            setDataChanged={setDataChanged}/>}
             </Stack.Screen>
             <Stack.Screen name={'TroveDetailsScreen'} options={{headerShown: false}}>
                 {(props) => <TroveDetailsScreen {...props} dbUser={dbUser}/>}
@@ -84,7 +98,7 @@ function ProfileStack({dbUser, setDbUser, logout}) {
     )
 }
 
-function TrovesStack({user, dbUser}) {
+function TrovesStack({user, dbUser, dataChanged, setDataChanged}) {
     return (
         <Stack.Navigator>
             <Stack.Screen name='BrowseTroves' options={{headerShown: false}}>
@@ -99,7 +113,7 @@ function TrovesStack({user, dbUser}) {
                 headerTitleAlign: 'left',
                 headerPressColor: 'black'
             }}>
-                {(props) => <CreateTroveScreen {...props} dbUser={dbUser}/>}
+                {(props) => <CreateTroveScreen {...props} dbUser={dbUser} dataChanged={dataChanged} setDataChanged={setDataChanged}/>}
             </Stack.Screen>
             <Stack.Screen name={'TroveDetailsScreen'} options={{headerShown: false}}>
                 {(props) => <TroveDetailsScreen {...props} dbUser={dbUser}/>}
@@ -151,6 +165,7 @@ function SignupStack({createAccount, user, login}) {
 function MainTabs({user, onLogout}) {
     // let MyTrovesScreen;
     const [dbUser, setDbUser] = useState(null);
+    const [dataChanged, setDataChanged] = useState(false)
     return (
         <Tab.Navigator style={styles.container} screenOptions={({route}) => ({
             headerShown: false,
@@ -184,10 +199,10 @@ function MainTabs({user, onLogout}) {
                 {(props) => <HomeStack {...props} user={user} dbUser={dbUser} setDbUser={setDbUser}/>}
             </Tab.Screen>
             <Tab.Screen name="Profile" options={{headerShown: false}}>
-                {(props) => <ProfileStack {...props} dbUser={dbUser} logout={onLogout} />}
+                {(props) => <ProfileStack {...props} dbUser={dbUser} logout={onLogout} dataChanged={dataChanged} setDataChanged={setDataChanged} />}
             </Tab.Screen>
             <Tab.Screen name="Troves" options={{headerShown: false}}>
-                {(props) => <TrovesStack {...props} dbUser={dbUser}/>}
+                {(props) => <TrovesStack {...props} dbUser={dbUser} dataChanged={dataChanged} setDataChanged={setDataChanged}/>}
             </Tab.Screen>
         </Tab.Navigator>
     );

@@ -80,9 +80,9 @@ export default function CreatePostScreen({navigation, route, onLogout, dbUser}) 
 
             <ScrollView style={{width: '100%', height: '100%'}}>
 
-                <View style={createPostStyles.postContainer}>
+                <View style={uiStyles.createPostContainer}>
 
-                    <View style={createPostStyles.postHeader}>
+                    <View style={uiStyles.createPostHeader}>
                         <Pressable
                             onPress={() => {
                                 navigation.goBack()
@@ -90,18 +90,19 @@ export default function CreatePostScreen({navigation, route, onLogout, dbUser}) 
                         >
                             <Text style={textStyles.header6}>Cancel</Text>
                         </Pressable>
-                        <Pressable
-                        style={uiStyles.buttonAccent}
-                        onPress={() => {
-                            handlePost()
 
-                        }}
+                        <Pressable
+                            style={uiStyles.buttonAccent}
+                            onPress={() => {
+                                handlePost()
+
+                            }}
                         >
                             <Text style={uiStyles.buttonAccentText}>Post</Text>
                         </Pressable>
                     </View>
 
-                    <View style={createPostStyles.postBody}>
+                    <View style={uiStyles.createPostBody}>
                         <View style={[uiStyles.smallProfilePicture]}/>
 
                         <TextInput style={createPostStyles.textarea}
