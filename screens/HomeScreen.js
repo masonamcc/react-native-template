@@ -1,5 +1,5 @@
 import React, {use, useEffect, useState} from 'react';
-import {View, Text, ScrollView, StyleSheet, SafeAreaView, TextInput, Button} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, SafeAreaView, TextInput, Button, Vibration} from 'react-native';
 import {getAllTemplates, getUserFromDb} from '../index';
 import {textStyles} from '../Styles/TextStyles.js';
 import {sectionStyles} from '../Styles/SectionStyles.js';
@@ -94,9 +94,10 @@ export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
     return (
         <SafeAreaView style={styles.safeView}>
             <View style={uiStyles.header}>
-                <Text style={textStyles.brand}>trove</Text>
+                <Text style={textStyles.brand}>Bank</Text>
                 <View style={{padding: 10}}>
                     <Icon  name="search-outline" size={25} color="#000" onPress={() => {
+                        Vibration.vibrate()
                         navigation.navigate('SearchScreen')
                     }}/>
                 </View>
