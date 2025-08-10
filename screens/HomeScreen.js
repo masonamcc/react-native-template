@@ -8,30 +8,32 @@ import {uiStyles} from '../Styles/UIStyles.js';
 import {troveStyles} from "../Styles/TroveStyles";
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {LinearGradient} from 'expo-linear-gradient';
+import '../Styles/universalStyles'
 
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import {Auth} from "aws-amplify";
+
 import brand from '../appConfiguration.json'
+import {universalStyles} from "../Styles/universalStyles";
 
 
 export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const user = await Auth.currentAuthenticatedUser();
-                const userEmail = user.attributes.email
-                const loggedInUser = await getUserFromDb(userEmail);
-                console.log('Logged in user: ', loggedInUser)
-                setDbUser(loggedInUser);
-            } catch (err) {
-                console.log('No user signed in', err);
-            }
-        };
-
-        fetchUser();
-    }, []);
+    // useEffect(() => {
+    //     const fetchUser = async () => {
+    //         try {
+    //             const user = await Auth.currentAuthenticatedUser();
+    //             const userEmail = user.attributes.email
+    //             const loggedInUser = await getUserFromDb(userEmail);
+    //             console.log('Logged in user: ', loggedInUser)
+    //             setDbUser(loggedInUser);
+    //         } catch (err) {
+    //             console.log('No user signed in', err);
+    //         }
+    //     };
+    //
+    //     fetchUser();
+    // }, []);
 
     const [templates, setTemplates] = useState([]);
 
@@ -101,73 +103,11 @@ export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
                 </View>
             </View>
 
-            <ScrollView style={{width: '100%', height: '100%', backgroundColor: '#e5e5e5'}}>
+            <ScrollView style={{width: '100%', height: '100%', display: "flex", backgroundColor: '#e5e5e5'}}>
+                <View style={universalStyles.centerChildren}>
+                    <Text style={universalStyles.fontSize3}>App here</Text>
+                </View>
 
-                <ScrollView style={{width: '100%'}}>
-                    <View style={sectionStyles.sectionA}>
-                        <Text style={textStyles.header3Bold}>Current Dig</Text>
-                        <View style={uiStyles.cardContainer}>
-                            <DigCard title={'GNX'} creator={'from Kendrick Lamar'} description={'New music ft. SZA'}
-                                     countdown={'5d 20h 24m 12s'}/>
-                        </View>
-                    </View>
-                    {/*<View style={sectionStyles.sectionA}>*/}
-                    {/*    <Text style={textStyles.header1}>New Troves</Text>*/}
-                    {/*    <View style={uiStyles.cardContainer}>*/}
-                    {/*        <Card title={'New Packs'} description={'Browse new art packs'}/>*/}
-                    {/*        <Card title={'Upcoming'} description={'Get notified when the new packs drop'}/>*/}
-                    {/*    </View>*/}
-                    {/*</View>*/}
-
-                    {/*Drops Section*/}
-                    <View style={sectionStyles.sectionA}>
-                        <View style={gridStyles.grid3}>
-                            <Text style={[textStyles.header1, {paddingRight: 20}]}>Drops</Text>
-                            <Text>Check out our latest additions</Text>
-                        </View>
-                        {templates.length === 0 ? (
-                            <Text>No templates to show</Text>
-                        ) : (
-                            templates.slice(0, 3).map((template, index) => (
-                                <TouchableOpacity
-                                    key={index}
-                                    style={styles.post}
-                                    onPress={() => {
-                                        navigation.navigate('TemplateDetails', {template});
-                                    }}
-                                >
-                                    <View key={index}>
-                                        <Text style={{fontWeight: 'bold', marginBottom: 10}}>{template.templateTitle}</Text>
-                                        <Text style={{marginBottom: 10}}>{template.templateDescription}</Text>
-                                        <Text style={{fontSize: 10}}>
-                                            Date Added: {new Date(template.timestamp).toLocaleDateString()}
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            ))
-                        )}
-                        <Text>
-                            View All >
-                        </Text>
-                    </View>
-
-                    <View style={sectionStyles.sectionA}>
-                        {/*<Text style={textStyles.header3}>Feed</Text>*/}
-                        <View style={uiStyles.postEl}>
-                            <TextInput
-                                style={uiStyles.postInput}
-                                placeholder="Something to Share?"
-                                value={post}
-                                onChangeText={setPost}
-                                multiline={true}
-                                numberOfLines={3}
-                            />
-                            <TouchableOpacity style={uiStyles.postButton}>
-                                <Text style={{color: 'white'}}>Post</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </ScrollView>
             </ScrollView>
         </SafeAreaView>
     );
@@ -188,5 +128,14 @@ const styles = StyleSheet.create({
         borderColor: '#b6b6b6',
         borderRadius: 10,
         marginBottom: 10
+    },
+    centerChildren: {
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100px",
+        width: "100px",
+        textAlign: "center",
+        background: "red",
+        padding: "2rem"
     }
 });

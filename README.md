@@ -5,10 +5,11 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+
 ## Installation
 1. Clone the repository:
 ```bash
- git clone https://github.com/yourusername/yourproject.git
+ git clone https://github.com/masonamcc/react-native-app-js-template.git
 ```
 
 2. Install dependencies:
@@ -16,8 +17,5 @@
  npm install
  ```
 
-This template is designed to give you a starting point for  aReact Native template. It features:
-1. Login Screen
-2. Signup Screens
-3. Home Screen
-4. Profile Screen
+### Dynamic Branding
+The file - **appConfiguration.json** - acts as a manifest for branding throughout the entire app. This file has **key: value** pairs that conveniently update text across the app.
