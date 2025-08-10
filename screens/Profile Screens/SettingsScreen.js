@@ -32,15 +32,6 @@ export default function SettingsScreen({route, logout, user, profileBackgroundEn
         return fixedUri;
     }
 
-    // const updateUser = async(profileBackgroundLink, dbUser) => {
-    //     await updateUser(profileBackgroundLink, dbUser)
-    // }
-    //
-    // useEffect(() => {
-    //     console.log(profileBackgroundLink)
-    // }, [profileBackgroundLink]);
-
-
     return (
         <SafeAreaView style={styles.safeView}>
             {/*<Text style={styles.title}>TROVE</Text>*/}

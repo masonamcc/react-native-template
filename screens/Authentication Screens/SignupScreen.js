@@ -86,14 +86,12 @@ export default function SignupScreen({navigation, onLogin}) {
                         />
                     </View>
 
-
-
                     {errorMessage ? (
                         <Text style={{color: 'red', marginBottom: 10}}>{errorMessage}</Text>
                     ) : null}
 
                     <Pressable
-                        style={[uniStyles.btnBlue, uniStyles.width75]}
+                        style={[uniStyles.btn, uniStyles.bgBlue, uniStyles.width75]}
                         title="Signup"
                         onPress={() => {
                             // navigation.navigate('SignupB')
@@ -122,7 +120,7 @@ export default function SignupScreen({navigation, onLogin}) {
                 </View>
 
                 <View>
-                    <Text>Terms of Service</Text>
+
                 </View>
 
             </SafeAreaView>

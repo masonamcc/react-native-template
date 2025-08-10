@@ -37,36 +37,6 @@ export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
 
     const [templates, setTemplates] = useState([]);
 
-    const Card = ({title, description}) => {
-        return (
-            <LinearGradient
-                style={uiStyles.card}
-                colors={['#f4f4f4', '#cdcdcd']}
-
-            >
-                <Text style={textStyles.header3}>{title}</Text>
-                <Text>{description}</Text>
-            </LinearGradient>
-        )
-    }
-
-    const DigCard = ({title, creator, description, countdown}) => {
-        return (
-            <LinearGradient
-                style={uiStyles.mainCard}
-                colors={['#f4f4f4', '#cdcdcd']}
-
-            >
-                <View style={uiStyles.mainCardHeader}>
-                    <Text style={textStyles.digCardTitle}>{title}</Text>
-                    <Text style={textStyles.digCardCreator}>{creator}</Text>
-                </View>
-                <Text>{description}</Text>
-                <Text style={textStyles.digCardCountdown}>{countdown}</Text>
-            </LinearGradient>
-        )
-    }
-
     const [post, setPost] = useState('')
 
     useEffect(() => {

@@ -85,7 +85,7 @@ export default function LoginScreen({navigation, onLogin}) {
                         {appConfig.tagline}
                     </Text>
 
-                    <View style={[uniStyles.py1, uniStyles.fullwidth]}>
+                    <View style={[uniStyles.py1, uniStyles.width75]}>
                         <TextInput
                             style={uiStyles.input}
                             placeholder="Email"
@@ -104,22 +104,21 @@ export default function LoginScreen({navigation, onLogin}) {
                         />
                     </View>
 
-
-
                     {errorMessage ? (
                         <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
                     ) : <></>}
 
                     <Pressable
-                        style={[uniStyles.btnBlue, uniStyles.width75]}
+                        style={[uniStyles.btn, uniStyles.bgBlue, uniStyles.width75]}
                         onPress={() => {
                             signIn(email, password)}}
                     >
+
                         <Text style={[uniStyles.btnText, uniStyles.white]}>Login</Text>
                     </Pressable>
 
                     <Pressable
-                        style={[uniStyles.btnBlue, uniStyles.width75]}
+                        style={[uniStyles.btn, uniStyles.bgBlue, uniStyles.width75]}
                         title="Signup"
                         onPress={() => {
                             navigation.navigate('SignupStack')
@@ -129,7 +128,12 @@ export default function LoginScreen({navigation, onLogin}) {
                 </View>
 
                 <View>
-                    <Text>Terms of Service</Text>
+                    <Text
+                        onPress={() => {
+                            navigation.navigate('DocumentStack')
+                        }}>
+                        Terms of Service
+                    </Text>
                 </View>
 
             </SafeAreaView>

@@ -26,13 +26,39 @@ export const uniStyles = StyleSheet.create({
     width75: {
         width: '75%'
     },
+    safeAreaView: {
+        width: '100%',
+        height: "100%",
+        alignItems: 'center',
+        justifyContent: 'start',
+        display: "flex",
+        backgroundColor: '#ffffff',
+    },
+    header: {
+        display: 'flex',
+        width: '100%',
+        height: 'auto',
+        backgroundColor: '#ffffff',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        top: 0,
+        paddingBottom: 10,
+        paddingInline: 20
+    },
 
     // Padding //
+    p1: {
+        padding: 10
+    },
     py1: {
         paddingBlock: 10
     },
     py1_5: {
         paddingBlock: 15
+    },
+    p2: {
+        padding: 20
     },
     py2: {
         paddingBlock: 20
@@ -47,9 +73,22 @@ export const uniStyles = StyleSheet.create({
         paddingBlock: 35
     },
 
+    // Margin //
+    mb0: {
+        marginBottom: 0
+    },
+    mb1: {
+        marginBottom: 10
+    },
+    mb1_5: {
+        marginBottom: 15
+    },
+    mb2: {
+        marginBottom: 20
+    },
+
     // *** Buttons *** //
-    btnBlue: {
-        backgroundColor: '#006dff',
+    btn: {
         paddingBlock: 10,
         paddingInline: 10,
         borderRadius: 8,
@@ -57,8 +96,8 @@ export const uniStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40
-        // flex: 1
     },
+
     btnText: {
         fontSize: 15,
         fontWeight: 700
@@ -72,17 +111,26 @@ export const uniStyles = StyleSheet.create({
     bgWhite: {
         backgroundColor: '#ffffff'
     },
-
-    black: {
+    bgBlack: {
         backgroundColor: '#000000',
     },
+    bgBlue: {
+        backgroundColor: '#006dff',
+    },
+
+    // Accents //
+    bgAccent1: {
+        backgroundColor: '#ff900c'
+    },
+    accent1: {
+        color: '#fbb600'
+    },
+
     // Colors //
     white: {
         color: '#ffffff'
     },
-    accent: {
-        color: '#fbb600'
-    },
+
 
     // *** Fonts *** //
 
@@ -125,6 +173,16 @@ export const uniStyles = StyleSheet.create({
         fontWeight: 800
     },
 
-
+    // *** Elements *** //
+    inputOt: {
+        height: 50,
+        width: '100%',
+        borderColor: 'rgba(0,0,0,.2)',
+        borderWidth: 1,
+        marginBottom: 10,
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        color: '#000000'
+    },
 
 })

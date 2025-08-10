@@ -21,17 +21,16 @@ import {textStyles} from "../../Styles/TextStyles";
 import {WebView} from 'react-native-webview';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Auth, Storage} from "aws-amplify";
-import {deleteMyTrove, getMyTroves} from "../../RESTFunctions/TroveRESTFunctions";
 import {troveStyles} from "../../Styles/TroveStyles";
 import {Video} from 'expo-av';
 import {useIsFocused} from '@react-navigation/native';
 
 import HomeScreen from "../HomeScreen";
 import {useFocusEffect} from "expo-router";
-import {deleteMyPost} from "../../RESTFunctions/PostRESTFunctions";
+
 import {BlurView} from "expo-blur";
 import {LinearGradient} from "expo-linear-gradient";
-import {fetchPexelsSearch} from "../../RESTFunctions/PexelsRESTFunctions";
+
 
 import { MenuProvider, Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
 

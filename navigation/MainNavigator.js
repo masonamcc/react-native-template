@@ -8,7 +8,6 @@ import SettingsScreen from '../screens/Profile Screens/SettingsScreen';
 import LoginScreen from '../screens/Authentication Screens/LoginScreen';
 import SignupScreen from '../screens/Authentication Screens/SignupScreen';
 import MyProfileScreen from "../screens/Profile Screens/MyProfileScreen";
-import MyTrovesScreen from "../screens/TrovesScreen";
 
 import {StyleSheet} from "react-native";
 import {Ionicons} from '@expo/vector-icons';
@@ -16,8 +15,7 @@ import {Ionicons} from '@expo/vector-icons';
 import SearchScreen from "../screens/SearchScreen";
 
 import UserProfileScreen from "../screens/UserProfileScreen"
-import CreateTroveScreen from "../screens/Trove Screens/CreateTroveScreen";
-import BrowseTrovesScreen from "../screens/Trove Screens/BrowseTrovesScreen"
+
 
 import VerificationScreen from "../screens/Authentication Screens/VerificationScreen";
 import CreatePostScreen from "../screens/Profile Screens/CreatePostScreen";
@@ -27,7 +25,8 @@ import Setup1Username from "../screens/Setup Screens/Setup1Username";
 import Setup2Name from "../screens/Setup Screens/Setup2Name";
 import Setup3Bio from "../screens/Setup Screens/Setup3Bio";
 import SetupFinal from "../screens/Setup Screens/SetupFinal";
-import TroveDetailsScreen from "../screens/Trove Screens/TroveDetailsScreen";
+
+import TermsOfService from "../screens/Document Screens/TermsOfService.js";
 
 // import SettingsScreen from '../screens/SettingsScreen';
 const RootStack = createStackNavigator();
@@ -63,13 +62,13 @@ function ProfileStack({dbUser, setDbUser, logout, dataChanged, setDataChanged}) 
 
             <Stack.Screen name="MyProfileScreen" options={{headerShown: false}}>
                 {(props) => <MyProfileScreen {...props}
-                                             dbUser={dbUser}
-                                             profileBackgroundEnabled={profileBackgroundEnabled}
-                                             setProfileBackgroundEnabled={setProfileBackgroundEnabled}
-                                             profileBackgroundLink = {profileBackgroundLink}
-                                             setProfileBackgroundLink = {setProfileBackgroundLink}
-                                             dataChanged={dataChanged}
-                                             setDataChanged={setDataChanged}/>}
+                     dbUser={dbUser}
+                     profileBackgroundEnabled={profileBackgroundEnabled}
+                     setProfileBackgroundEnabled={setProfileBackgroundEnabled}
+                     profileBackgroundLink = {profileBackgroundLink}
+                     setProfileBackgroundLink = {setProfileBackgroundLink}
+                     dataChanged={dataChanged}
+                     setDataChanged={setDataChanged}/>}
             </Stack.Screen>
 
             <Stack.Screen name="CreatePostScreen" options={{headerShown: false}}>
@@ -77,50 +76,30 @@ function ProfileStack({dbUser, setDbUser, logout, dataChanged, setDataChanged}) 
             </Stack.Screen>
 
             <Stack.Screen name="Settings" options={{
-                title: '',
+                title: 'Profile Settings',
                 headerBackTitle: 'Back'
             }}>
                 {(props) => <SettingsScreen {...props}
-                                            dbUser={dbUser}
-                                            logout={logout}
-                                            profileBackgroundEnabled={profileBackgroundEnabled}
-                                            setProfileBackgroundEnabled={setProfileBackgroundEnabled}
-                                            profileBackgroundLink = {profileBackgroundLink}
-                                            setProfileBackgroundLink = {setProfileBackgroundLink}
-                                            dataChanged={dataChanged}
-                                            setDataChanged={setDataChanged}/>}
+                    />}
             </Stack.Screen>
-            <Stack.Screen name={'TroveDetailsScreen'} options={{headerShown: false}}>
-                {(props) => <TroveDetailsScreen {...props} dbUser={dbUser}/>}
-            </Stack.Screen>
+
 
         </Stack.Navigator>
     )
 }
 
-function TrovesStack({user, dbUser, dataChanged, setDataChanged}) {
+function DocumentStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name='BrowseTroves' options={{headerShown: false}}>
-                {(props) => <BrowseTrovesScreen {...props} dbUser={dbUser}/>}
-            </Stack.Screen>
-            <Stack.Screen name='My Troves' options={{headerShown: false}}>
-                {(props) => <MyTrovesScreen {...props} user={user}/>}
-            </Stack.Screen>
-            <Stack.Screen name='Create Trove' options={{
-                title: 'Create Trove',
-                headerBackTitle: '',
-                headerTitleAlign: 'left',
-                headerPressColor: 'black'
-            }}>
-                {(props) => <CreateTroveScreen {...props} dbUser={dbUser} dataChanged={dataChanged} setDataChanged={setDataChanged}/>}
-            </Stack.Screen>
-            <Stack.Screen name={'TroveDetailsScreen'} options={{headerShown: false}}>
-                {(props) => <TroveDetailsScreen {...props} dbUser={dbUser}/>}
-            </Stack.Screen>
+            <Stack.Screen name="TermsOfService" component={TermsOfService} options={{
+                title: 'Terms of Service',
+                headerBackTitle: 'Back'
+            }}/>
         </Stack.Navigator>
     )
 }
+
+
 
 function LoginStack({onLogin}) {
     // let SignupScreen;
@@ -163,7 +142,7 @@ function SignupStack({createAccount, user, login}) {
 }
 
 function MainTabs({user, onLogout}) {
-    // let MyTrovesScreen;
+
     const [dbUser, setDbUser] = useState(null);
     const [dataChanged, setDataChanged] = useState(false)
     return (
@@ -178,8 +157,6 @@ function MainTabs({user, onLogout}) {
                     iconName = focused ? 'settings' : 'settings-outline'; // Example
                 } else if (route.name === 'Profile') {
                     iconName = focused ? 'person-circle' : 'person-circle-outline';
-                } else if (route.name === 'Troves') {
-                    iconName = focused ? 'diamond-outline' : 'diamond-outline';
                 }
 
                 return <Ionicons name={iconName} size={size} color={color}/>;
@@ -201,9 +178,7 @@ function MainTabs({user, onLogout}) {
             <Tab.Screen name="Profile" options={{headerShown: false}}>
                 {(props) => <ProfileStack {...props} dbUser={dbUser} logout={onLogout} dataChanged={dataChanged} setDataChanged={setDataChanged} />}
             </Tab.Screen>
-            {/*<Tab.Screen name="Troves" options={{headerShown: false}}>*/}
-            {/*    {(props) => <TrovesStack {...props} dbUser={dbUser} dataChanged={dataChanged} setDataChanged={setDataChanged}/>}*/}
-            {/*</Tab.Screen>*/}
+
         </Tab.Navigator>
     );
 }
@@ -227,35 +202,36 @@ export default function MainNavigator() {
                     {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
                 </RootStack.Screen>
             ) : (
-                // <RootStack.Screen name="MainTabs">
-                //     {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
-                // </RootStack.Screen>
-                <>
-                    <RootStack.Screen name="Login">
-                        {(props) => <LoginScreen {...props}
-                                                 onLogin={(user) => {
-                                                     console.log('Hello from Main Navigator');
-                                                     setUser(user);      // Save the user here
-                                                     setIsLoggedIn(true);        // Trigger tab navigation
-                                                 }}
-                        />}
-                    </RootStack.Screen>
-                    <RootStack.Screen name="SignupStack">
-                        {(props) => <SignupStack {...props}
-
-                                                 createAccount={(user) => {
-                                                     console.log('Beginning Signup Stack');
-                                                     // setIsLoggedIn(true);
-                                                 }}
-
-                                                 login={(user) => {
-                                                     console.log('Logging user in from Navigator');
-                                                     // setUser(user);      // Save the user here
-                                                     setIsLoggedIn(true);        // Trigger tab navigation
-                                                 }}
-                        />}
-                    </RootStack.Screen>
-                </>
+                <RootStack.Screen name="MainTabs">
+                    {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
+                </RootStack.Screen>
+                // <>
+                //     <RootStack.Screen name="Login">
+                //         {(props) => <LoginStack {...props}
+                //              onLogin={(user) => {
+                //                  console.log('Hello from Main Navigator');
+                //                  setUser(user);      // Save the user here
+                //                  setIsLoggedIn(true);        // Trigger tab navigation
+                //              }}
+                //         />}
+                //     </RootStack.Screen>
+                //     <RootStack.Screen name="SignupStack">
+                //         {(props) => <SignupStack {...props}
+                //              createAccount={(user) => {
+                //                  console.log('Beginning Signup Stack');
+                //                  // setIsLoggedIn(true);
+                //              }}
+                //
+                //              login={(user) => {
+                //                  console.log('Logging user in from Navigator');
+                //                  // setUser(user);      // Save the user here
+                //                  setIsLoggedIn(true);        // Trigger tab navigation
+                //              }}
+                //         />}
+                //     </RootStack.Screen>
+                //     <RootStack.Screen name="DocumentStack" component={DocumentStack} />
+                //
+                // </>
             )}
         </RootStack.Navigator>
     );

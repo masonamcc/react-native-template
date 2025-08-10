@@ -1,4 +1,7 @@
 {
   "appName" : "appName",
-  "tagline": "This is the tagline"
+  "tagline": "This is the tagline",
+  "businessInfo": {
+    "supportEmail": "support@email.com"
+  }
 }

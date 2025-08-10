@@ -18,8 +18,8 @@ import {WebView} from 'react-native-webview';
 import {Ionicons} from "@expo/vector-icons";
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Auth} from "aws-amplify";
-import {getMyTroves} from "../RESTFunctions/TroveRESTFunctions";
-import {deleteMyPost, getUserPosts} from "../RESTFunctions/PostRESTFunctions";
+
+
 import {troveStyles} from "../Styles/TroveStyles";
 // import Spline from '@splinetool/react-spline';
 

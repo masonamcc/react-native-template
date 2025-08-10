@@ -19,3 +19,27 @@
 
 ### Dynamic Branding
 The file - **appConfiguration.json** - acts as a manifest for branding throughout the entire app. This file has **key: value** pairs that conveniently update text across the app.
+
+### Universal Styling
+The `uniStyles.js` file contains general styling. This makes it easier to maintain consistent styles. You can edit the StyleSheet here to change styling app-wide.
+
+Examples Include:
+
+
+
+
+>// *** Coloring *** // <br> <br>
+// Backgrounds // <br>
+`bgWhite: {
+backgroundColor: '#ffffff'
+},` <br>
+`bgBlack: {
+backgroundColor: '#000000',
+},` <br> <br>
+// Colors // <br>
+`white: {
+color: '#ffffff'
+},` <br>
+`accent: {
+color: '#fbb600'
+},`
