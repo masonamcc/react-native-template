@@ -4,11 +4,16 @@ import {uiStyles} from "../../Styles/UIStyles";
 import {sectionStyles} from "../../Styles/SectionStyles";
 import {textStyles} from "../../Styles/TextStyles";
 import {LinearGradient} from "expo-linear-gradient";
-import {TouchableOpacity} from "react-native-gesture-handler";
+import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
 import {getAllUsers} from '../../index'
-// import './firebase'
-// import {auth} from "../firebase";
 import {Auth} from 'aws-amplify';
+
+// Imports the configuration file
+import appConfig from '../../appConfiguration.json'
+
+// Import styles
+import '../../Styles/GridStyles.js'
+import {uniStyles} from "../../Styles/uniStyles";
 
 export default function LoginScreen({navigation, onLogin}) {
 
@@ -68,54 +73,59 @@ export default function LoginScreen({navigation, onLogin}) {
     return (
         <LinearGradient
             style={{height: '100%'}}
-            colors={['#ffffff', '#bbbbbb']}
+            colors={['#ffffff', '#ffffff']}
         >
             <SafeAreaView style={sectionStyles.loginSection}>
 
-                <View></View>
-
                 <View style={sectionStyles.loginMiddle}>
-                    <Text style={[textStyles.brand, {marginBottom: 10, fontSize: 50, color: '#646464'}]}>trove</Text>
+                    <Text style={[uniStyles.h2, uniStyles.fontWeight700]}>
+                        {appConfig.appName}
+                    </Text>
+                    <Text style={styles.tagline}>
+                        {appConfig.tagline}
+                    </Text>
 
-                    <TextInput
-                        style={uiStyles.input}
-                        placeholder="Email"
-                        placeholderTextColor={'#373737'}
-                        value={email}
-                        onChangeText={(input) => setEmail(input.toLowerCase().trim())}
-                    />
+                    <View style={[uniStyles.py1, uniStyles.fullwidth]}>
+                        <TextInput
+                            style={uiStyles.input}
+                            placeholder="Email"
+                            placeholderTextColor={'#373737'}
+                            value={email}
+                            onChangeText={(input) => setEmail(input.toLowerCase().trim())}
+                        />
 
-                    <TextInput
-                        style={uiStyles.input}
-                        placeholder="Password"
-                        placeholderTextColor={'#373737'}
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                    />
+                        <TextInput
+                            style={uiStyles.input}
+                            placeholder="Password"
+                            placeholderTextColor={'#373737'}
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                        />
+                    </View>
+
+
 
                     {errorMessage ? (
                         <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
-                    ) : null}
+                    ) : <></>}
 
-                    <Text style={{marginTop: 10}} onPress={() => {
-                        signIn(email, password)}}>
-                        Login
-                    </Text>
+                    <Pressable
+                        style={[uniStyles.btnBlue, uniStyles.width75]}
+                        onPress={() => {
+                            signIn(email, password)}}
+                    >
+                        <Text style={[uniStyles.btnText, uniStyles.white]}>Login</Text>
+                    </Pressable>
 
-                    <Text style={{marginTop: 10}}>
-                        Don't have an account?
-                    </Text>
-
-                    <TouchableOpacity
-                        style={uiStyles.button}
+                    <Pressable
+                        style={[uniStyles.btnBlue, uniStyles.width75]}
                         title="Signup"
                         onPress={() => {
                             navigation.navigate('SignupStack')
-                            console.log('Sign Up button pressed')
                         }}>
-                        <Text>Sign Up</Text>
-                    </TouchableOpacity>
+                        <Text style={[uniStyles.btnText, uniStyles.white]}>Create an Account</Text>
+                    </Pressable>
                 </View>
 
                 <View>
@@ -126,3 +136,16 @@ export default function LoginScreen({navigation, onLogin}) {
         </LinearGradient>
     );
 };
+
+const styles = StyleSheet.create({
+    brandName: {
+        fontSize: 30,
+        fontWeight: 700,
+        marginBottom: 10
+    },
+    tagline: {
+        fontSize: 15,
+        fontWeight: 500,
+        marginBottom: 10
+    }
+})

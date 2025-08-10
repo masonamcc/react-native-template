@@ -153,3 +153,12 @@ export const getMyPosts = async (user) => {
     // console.log('My Posts: ', myPosts)
     return Array.isArray(myPosts) ? myPosts : [];
 }
+
+const mason = {
+    name: 'Mason McCall',
+    age: 28,
+    officialOccupation: 'Cloud Engineer',
+    unofficialOccupation: 'Software Engineer',
+    collegeGrad: false,
+    yearsInIT: 2
+}

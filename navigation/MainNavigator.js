@@ -184,10 +184,10 @@ function MainTabs({user, onLogout}) {
 
                 return <Ionicons name={iconName} size={size} color={color}/>;
             },
-            tabBarActiveTintColor: 'tomato', // Active icon color
+            tabBarActiveTintColor: '#38ef6e', // Active icon color
             tabBarInactiveTintColor: 'gray', // Inactive icon color
             tabBarStyle: {
-                backgroundColor: 'black',
+                backgroundColor: '#ffffff',
                 position: 'absolute', // Optional: useful for layering
                 elevation: 0,         // Android
                 shadowOpacity: 0,     // iOS
@@ -201,9 +201,9 @@ function MainTabs({user, onLogout}) {
             <Tab.Screen name="Profile" options={{headerShown: false}}>
                 {(props) => <ProfileStack {...props} dbUser={dbUser} logout={onLogout} dataChanged={dataChanged} setDataChanged={setDataChanged} />}
             </Tab.Screen>
-            <Tab.Screen name="Troves" options={{headerShown: false}}>
-                {(props) => <TrovesStack {...props} dbUser={dbUser} dataChanged={dataChanged} setDataChanged={setDataChanged}/>}
-            </Tab.Screen>
+            {/*<Tab.Screen name="Troves" options={{headerShown: false}}>*/}
+            {/*    {(props) => <TrovesStack {...props} dbUser={dbUser} dataChanged={dataChanged} setDataChanged={setDataChanged}/>}*/}
+            {/*</Tab.Screen>*/}
         </Tab.Navigator>
     );
 }
@@ -227,35 +227,35 @@ export default function MainNavigator() {
                     {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
                 </RootStack.Screen>
             ) : (
-                <RootStack.Screen name="MainTabs">
-                    {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
-                </RootStack.Screen>
-                // <>
-                //     <RootStack.Screen name="Login">
-                //         {(props) => <LoginScreen {...props}
-                //                                  onLogin={(user) => {
-                //                                      console.log('Hello from Main Navigator');
-                //                                      setUser(user);      // Save the user here
-                //                                      setIsLoggedIn(true);        // Trigger tab navigation
-                //                                  }}
-                //         />}
-                //     </RootStack.Screen>
-                //     <RootStack.Screen name="SignupStack">
-                //         {(props) => <SignupStack {...props}
-                //
-                //                                  createAccount={(user) => {
-                //                                      console.log('Beginning Signup Stack');
-                //                                      // setIsLoggedIn(true);
-                //                                  }}
-                //
-                //                                  login={(user) => {
-                //                                      console.log('Logging user in from Navigator');
-                //                                      // setUser(user);      // Save the user here
-                //                                      setIsLoggedIn(true);        // Trigger tab navigation
-                //                                  }}
-                //         />}
-                //     </RootStack.Screen>
-                // </>
+                // <RootStack.Screen name="MainTabs">
+                //     {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
+                // </RootStack.Screen>
+                <>
+                    <RootStack.Screen name="Login">
+                        {(props) => <LoginScreen {...props}
+                                                 onLogin={(user) => {
+                                                     console.log('Hello from Main Navigator');
+                                                     setUser(user);      // Save the user here
+                                                     setIsLoggedIn(true);        // Trigger tab navigation
+                                                 }}
+                        />}
+                    </RootStack.Screen>
+                    <RootStack.Screen name="SignupStack">
+                        {(props) => <SignupStack {...props}
+
+                                                 createAccount={(user) => {
+                                                     console.log('Beginning Signup Stack');
+                                                     // setIsLoggedIn(true);
+                                                 }}
+
+                                                 login={(user) => {
+                                                     console.log('Logging user in from Navigator');
+                                                     // setUser(user);      // Save the user here
+                                                     setIsLoggedIn(true);        // Trigger tab navigation
+                                                 }}
+                        />}
+                    </RootStack.Screen>
+                </>
             )}
         </RootStack.Navigator>
     );

@@ -8,13 +8,13 @@ import {uiStyles} from '../Styles/UIStyles.js';
 import {troveStyles} from "../Styles/TroveStyles";
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {LinearGradient} from 'expo-linear-gradient';
-import '../Styles/universalStyles'
+import '../Styles/uniStyles'
 
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import brand from '../appConfiguration.json'
-import {universalStyles} from "../Styles/universalStyles";
+import {uniStyles} from "../Styles/uniStyles";
 
 
 export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
@@ -97,15 +97,14 @@ export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
                 <Text style={textStyles.brand}>{brand.appName}</Text>
                 <View style={{padding: 10}}>
                     <Icon  name="menu-outline" size={25} color="#000" onPress={() => {
-                        Vibration.vibrate(3000)
                         navigation.navigate('SearchScreen')
                     }}/>
                 </View>
             </View>
 
             <ScrollView style={{width: '100%', height: '100%', display: "flex", backgroundColor: '#e5e5e5'}}>
-                <View style={universalStyles.centerChildren}>
-                    <Text style={universalStyles.fontSize3}>App here</Text>
+                <View style={uniStyles.centerChildren}>
+                    <Text style={uniStyles.fontSize3}>Home</Text>
                 </View>
 
             </ScrollView>

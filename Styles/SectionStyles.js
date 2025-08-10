@@ -15,15 +15,15 @@ export const sectionStyles = StyleSheet.create({
         alignItems: 'center',
         flex: 1
     },
-    signUp: {
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        // flex: 1,
-        height: '100%',
-        // width: '100%',
-        // padding: 200,
-        backgroundColor: '#cfcfcf'
-    },
+    // signUp: {
+    //     justifyContent: 'space-between',
+    //     alignItems: 'center',
+    //     // flex: 1,
+    //     height: '100%',
+    //     // width: '100%',
+    //     // padding: 200,
+    //     backgroundColor: '#cfcfcf'
+    // },
 
     loginMiddle: {
         width: '100%',

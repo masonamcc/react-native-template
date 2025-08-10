@@ -4,12 +4,16 @@ import {uiStyles} from "../../Styles/UIStyles";
 import {sectionStyles} from "../../Styles/SectionStyles";
 import {textStyles} from "../../Styles/TextStyles";
 import {LinearGradient} from "expo-linear-gradient";
-import {TouchableOpacity} from "react-native-gesture-handler";
+import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
 import {createUser} from "../../index";
 import Setup1Username from "../Setup Screens/Setup1Username";
 // import './firebase'
 // import {auth} from "../firebase";
 import {Auth} from 'aws-amplify';
+
+// Imports the configuration file
+import appConfig from '../../appConfiguration.json'
+import {uniStyles} from "../../Styles/uniStyles";
 
 export default function SignupScreen({navigation, onLogin}) {
 
@@ -42,78 +46,87 @@ export default function SignupScreen({navigation, onLogin}) {
     };
 
     return (
-        <SafeAreaView style={sectionStyles.signUp}>
+        <LinearGradient
+            style={{height: '100%'}}
+            colors={['#ffffff', '#ffffff']}
+        >
+            <SafeAreaView style={sectionStyles.loginSection}>
 
-            <View></View>
+                <View></View>
 
-            <View style={sectionStyles.signUpMiddle}>
+                <View style={sectionStyles.signUpMiddle}>
 
-                <Text style={[{fontWeight: 500, marginBottom: 10, fontSize: 25, color: '#000'}]}>Sign up for <Text style={textStyles.brandAccent}>trove</Text></Text>
+                    <Text style={[uniStyles.h3, uniStyles.fontWeight700]}>Create an Account</Text>
 
-                <TextInput
-                    style={uiStyles.input}
-                    placeholder="Enter your email"
-                    // placeholderTextColor={'rgba(255,255,255,.5)'}
-                    value={email}
-                    onChangeText={(input) => setEmail(input.toLowerCase().trim())}
-                />
+                    <View style={[uniStyles.py1, uniStyles.fullwidth]}>
+                        <TextInput
+                            style={uiStyles.input}
+                            placeholder="Enter your email"
+                            // placeholderTextColor={'rgba(255,255,255,.5)'}
+                            value={email}
+                            onChangeText={(input) => setEmail(input.toLowerCase().trim())}
+                        />
 
-                <TextInput
-                    style={uiStyles.input}
-                    placeholder="Choose a Password"
-                    // placeholderTextColor={'rgba(255,255,255,.5)'}
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                />
+                        <TextInput
+                            style={uiStyles.input}
+                            placeholder="Choose a Password"
+                            // placeholderTextColor={'rgba(255,255,255,.5)'}
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                        />
 
-                <TextInput
-                    style={uiStyles.input}
-                    placeholder="Confirm Your Password"
-                    // placeholderTextColor={'rgba(255,255,255,.5)'}
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                    secureTextEntry
-                />
+                        <TextInput
+                            style={uiStyles.input}
+                            placeholder="Confirm Your Password"
+                            // placeholderTextColor={'rgba(255,255,255,.5)'}
+                            value={confirmPassword}
+                            onChangeText={setConfirmPassword}
+                            secureTextEntry
+                        />
+                    </View>
 
-                {errorMessage ? (
-                    <Text style={{color: 'red', marginBottom: 10}}>{errorMessage}</Text>
-                ) : null}
 
-                <TouchableOpacity
-                    style={uiStyles.buttonAccent}
-                    title="Signup"
-                    onPress={() => {
-                        // navigation.navigate('SignupB')
-                        console.log('Create Account button pressed')
-                        if (email === '' || password === '') {
-                            console.log('Username and/or password cannot be null')
-                        } else if ((email && password && confirmPassword) && password === confirmPassword) {
-                            // console.log('Creating new account for: ', username)
-                            signUp(email, password);
-                            // onLogin
 
-                        } else if (password !== confirmPassword) {
-                            setErrorMessage('Passwords do not match')
-                            console.log('Passwords do not match')
-                        }
-                    }}>
-                    <Text style={{color: 'white'}}>Create Account</Text>
-                </TouchableOpacity>
+                    {errorMessage ? (
+                        <Text style={{color: 'red', marginBottom: 10}}>{errorMessage}</Text>
+                    ) : null}
 
-                <Text style={{marginTop: 10, color: 'black'}}
-                      onPress={() => {
-                          navigation.navigate('Login')
-                      }}>
-                    Remember your login?
-                </Text>
-            </View>
+                    <Pressable
+                        style={[uniStyles.btnBlue, uniStyles.width75]}
+                        title="Signup"
+                        onPress={() => {
+                            // navigation.navigate('SignupB')
+                            console.log('Create Account button pressed')
+                            if (email === '' || password === '') {
+                                console.log('Username and/or password cannot be null')
+                            } else if ((email && password && confirmPassword) && password === confirmPassword) {
+                                // console.log('Creating new account for: ', username)
+                                signUp(email, password);
+                                // onLogin
 
-            <View>
-                <Text>Terms of Service</Text>
-            </View>
+                            } else if (password !== confirmPassword) {
+                                setErrorMessage('Passwords do not match')
+                                console.log('Passwords do not match')
+                            }
+                        }}>
+                        <Text style={[uniStyles.btnText, uniStyles.white]}>Create Account</Text>
+                    </Pressable>
 
-        </SafeAreaView>
+                    <Text style={{marginTop: 10, color: 'black'}}
+                          onPress={() => {
+                              navigation.navigate('Login')
+                          }}>
+                        Login instead
+                    </Text>
+                </View>
+
+                <View>
+                    <Text>Terms of Service</Text>
+                </View>
+
+            </SafeAreaView>
+        </LinearGradient>
 
     );
 };
