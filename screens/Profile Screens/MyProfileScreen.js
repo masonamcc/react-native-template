@@ -25,7 +25,7 @@ import {deleteMyTrove, getMyTroves} from "../../RESTFunctions/TroveRESTFunctions
 import {troveStyles} from "../../Styles/TroveStyles";
 import {Video} from 'expo-av';
 import {useIsFocused} from '@react-navigation/native';
-import StingerTransition from "../../Stingers/Stinger_Flame";
+
 import HomeScreen from "../HomeScreen";
 import {useFocusEffect} from "expo-router";
 import {deleteMyPost} from "../../RESTFunctions/PostRESTFunctions";
@@ -175,7 +175,7 @@ export default function MyProfileScreen({
                     )}
                     <View style={uiStyles.header}>
 
-                        <View><Text style={uiStyles.profileUsername}>@{dbUser.username}</Text></View>
+                        <View><Text style={uiStyles.profileUsername}>@{dbUser?.username}</Text></View>
 
                         <View>
 
@@ -200,8 +200,8 @@ export default function MyProfileScreen({
                                 <View style={uiStyles.profilePicture}/>
                                 <View style={{flexDirection: 'column'}}>
 
-                                    <Text style={uiStyles.profileMyName}>{dbUser.firstName} {dbUser.lastName}</Text>
-                                    <Text style={uiStyles.profileBio}>{dbUser.bio}</Text>
+                                    <Text style={uiStyles.profileMyName}>{dbUser?.firstName} {dbUser?.lastName}</Text>
+                                    <Text style={uiStyles.profileBio}>{dbUser?.bio}</Text>
                                 </View>
                             </View>
 

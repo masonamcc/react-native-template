@@ -5,8 +5,6 @@ import {sectionStyles} from "../../Styles/SectionStyles";
 import {textStyles} from "../../Styles/TextStyles";
 import {LinearGradient} from "expo-linear-gradient";
 import {TouchableOpacity} from "react-native-gesture-handler";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, initializeAuth} from "firebase/auth";
-import {app, auth, db, storage} from "../../firebase";
 import {getAllUsers} from '../../index'
 // import './firebase'
 // import {auth} from "../firebase";

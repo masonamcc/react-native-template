@@ -8,21 +8,8 @@ import MainNavigator from './navigation/MainNavigator';
 import { textStyles } from './Styles/TextStyles.js';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {uiStyles} from "./Styles/UIStyles";
-import './firebase';
-import { Amplify, Auth } from 'aws-amplify';
-import awsconfig from './src/aws-exports';
-
-Amplify.configure(awsconfig);
-
 
 export default function App() {
-
-    useEffect(() => {
-        if (1 < 2)
-            console.log("hi there")
-    })
-
-
 
     return (
         <GestureHandlerRootView style={{flex: 1}}>

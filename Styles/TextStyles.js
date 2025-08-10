@@ -4,7 +4,7 @@ export const textStyles = StyleSheet.create({
     brand: {
         fontWeight: 700,
         fontSize: 20,
-        color: 'white'
+        color: '#000000'
     },
     brandAccent: {
         fontWeight: 800,

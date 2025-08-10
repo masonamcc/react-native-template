@@ -8,14 +8,12 @@ import {uiStyles} from '../Styles/UIStyles.js';
 import {troveStyles} from "../Styles/TroveStyles";
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {LinearGradient} from 'expo-linear-gradient';
-// import Carousel from 'react-native-reanimated-carousel';
-// import {Navigation} from "swiper/modules";
-import { useNavigation } from '@react-navigation/native';
 
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Auth} from "aws-amplify";
-import StingerTransition from "../Stingers/Stinger_Flame";
-import {useVideoPlayer, VideoView} from "expo-video";
+// import {Auth} from "aws-amplify";
+import brand from '../appConfiguration.json'
+
 
 export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
 
@@ -94,10 +92,10 @@ export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
     return (
         <SafeAreaView style={styles.safeView}>
             <View style={uiStyles.header}>
-                <Text style={textStyles.brand}>Bank</Text>
+                <Text style={textStyles.brand}>{brand.appName}</Text>
                 <View style={{padding: 10}}>
-                    <Icon  name="search-outline" size={25} color="#000" onPress={() => {
-                        Vibration.vibrate()
+                    <Icon  name="menu-outline" size={25} color="#000" onPress={() => {
+                        Vibration.vibrate(3000)
                         navigation.navigate('SearchScreen')
                     }}/>
                 </View>

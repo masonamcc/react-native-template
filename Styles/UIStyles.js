@@ -9,7 +9,7 @@ export const uiStyles = StyleSheet.create({
     header: {
         width: '100%',
         height: 'auto',
-        backgroundColor: 'white',
+        backgroundColor: '#ffffff',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',

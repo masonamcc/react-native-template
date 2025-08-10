@@ -227,32 +227,35 @@ export default function MainNavigator() {
                     {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
                 </RootStack.Screen>
             ) : (
-                <>
-                    <RootStack.Screen name="Login">
-                        {(props) => <LoginScreen {...props}
-                                                 onLogin={(user) => {
-                                                     console.log('Hello from Main Navigator');
-                                                     setUser(user);      // Save the user here
-                                                     setIsLoggedIn(true);        // Trigger tab navigation
-                                                 }}
-                        />}
-                    </RootStack.Screen>
-                    <RootStack.Screen name="SignupStack">
-                        {(props) => <SignupStack {...props}
-
-                                                 createAccount={(user) => {
-                                                     console.log('Beginning Signup Stack');
-                                                     // setIsLoggedIn(true);
-                                                 }}
-
-                                                 login={(user) => {
-                                                     console.log('Logging user in from Navigator');
-                                                     // setUser(user);      // Save the user here
-                                                     setIsLoggedIn(true);        // Trigger tab navigation
-                                                 }}
-                        />}
-                    </RootStack.Screen>
-                </>
+                <RootStack.Screen name="MainTabs">
+                    {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
+                </RootStack.Screen>
+                // <>
+                //     <RootStack.Screen name="Login">
+                //         {(props) => <LoginScreen {...props}
+                //                                  onLogin={(user) => {
+                //                                      console.log('Hello from Main Navigator');
+                //                                      setUser(user);      // Save the user here
+                //                                      setIsLoggedIn(true);        // Trigger tab navigation
+                //                                  }}
+                //         />}
+                //     </RootStack.Screen>
+                //     <RootStack.Screen name="SignupStack">
+                //         {(props) => <SignupStack {...props}
+                //
+                //                                  createAccount={(user) => {
+                //                                      console.log('Beginning Signup Stack');
+                //                                      // setIsLoggedIn(true);
+                //                                  }}
+                //
+                //                                  login={(user) => {
+                //                                      console.log('Logging user in from Navigator');
+                //                                      // setUser(user);      // Save the user here
+                //                                      setIsLoggedIn(true);        // Trigger tab navigation
+                //                                  }}
+                //         />}
+                //     </RootStack.Screen>
+                // </>
             )}
         </RootStack.Navigator>
     );
