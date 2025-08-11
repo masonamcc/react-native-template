@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, Button, TextInput} from 'react-native';
-import {uiStyles} from "../../styles/UIStyles";
-import {sectionStyles} from "../../styles/SectionStyles";
 import {LinearGradient} from "expo-linear-gradient";
 import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
 import {Auth} from 'aws-amplify';
@@ -38,78 +36,86 @@ export default function SignupScreen({navigation, onLogin}) {
             style={{height: '100%'}}
             colors={['#ffffff', '#ffffff']}
         >
-            <SafeAreaView style={sectionStyles.loginSection}>
+            <SafeAreaView style={uniStyles.safeAreaView}>
 
-                <View></View>
+                <View style={[uniStyles.centeredScreen, uniStyles.width75]}>
 
-                <View style={sectionStyles.signUpMiddle}>
+                    <View></View>
 
-                    <Text style={[uniStyles.h3, uniStyles.fontWeight700]}>Create an Account</Text>
+                    <View style={[uniStyles.centered]}>
 
-                    <View style={[uniStyles.py1, uniStyles.fullwidth]}>
-                        <TextInput
-                            style={uiStyles.input}
-                            placeholder="Enter your email"
-                            // placeholderTextColor={'rgba(255,255,255,.5)'}
-                            value={email}
-                            onChangeText={(input) => setEmail(input.toLowerCase().trim())}
-                        />
+                        <Text style={[uniStyles.h3, uniStyles.fontWeight700]}>
+                            Create an Account
+                        </Text>
 
-                        <TextInput
-                            style={uiStyles.input}
-                            placeholder="Choose a Password"
-                            // placeholderTextColor={'rgba(255,255,255,.5)'}
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry
-                        />
+                        <View style={[uniStyles.py1, uniStyles.fullwidth]}>
+                            <TextInput
+                                style={uniStyles.input}
+                                placeholder="Enter your email"
+                                // placeholderTextColor={'rgba(255,255,255,.5)'}
+                                value={email}
+                                onChangeText={(input) => setEmail(input.toLowerCase().trim())}
+                            />
 
-                        <TextInput
-                            style={uiStyles.input}
-                            placeholder="Confirm Your Password"
-                            // placeholderTextColor={'rgba(255,255,255,.5)'}
-                            value={confirmPassword}
-                            onChangeText={setConfirmPassword}
-                            secureTextEntry
-                        />
+                            <TextInput
+                                style={uniStyles.input}
+                                placeholder="Choose a Password"
+                                // placeholderTextColor={'rgba(255,255,255,.5)'}
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry
+                            />
+
+                            <TextInput
+                                style={uniStyles.input}
+                                placeholder="Confirm Your Password"
+                                // placeholderTextColor={'rgba(255,255,255,.5)'}
+                                value={confirmPassword}
+                                onChangeText={setConfirmPassword}
+                                secureTextEntry
+                            />
+                        </View>
+
+                        {errorMessage ? (
+                            <Text style={{color: 'red', marginBottom: 10}}>{errorMessage}</Text>
+                        ) : null}
+
+                        <Pressable
+                            style={[uniStyles.btn, uniStyles.bgBlue, uniStyles.fullwidth]}
+                            title="Signup"
+                            onPress={() => {
+                                // navigation.navigate('SignupB')
+                                console.log('Create Account button pressed')
+                                if (email === '' || password === '') {
+                                    console.log('Username and/or password cannot be null')
+                                } else if ((email && password && confirmPassword) && password === confirmPassword) {
+                                    // console.log('Creating new account for: ', username)
+                                    signUp(email, password);
+                                    // onLogin
+
+                                } else if (password !== confirmPassword) {
+                                    setErrorMessage('Passwords do not match')
+                                    console.log('Passwords do not match')
+                                }
+                            }}>
+                            <Text style={[uniStyles.btnText, uniStyles.white]}>Create Account</Text>
+                        </Pressable>
+
+                        <Text style={{marginTop: 10, color: 'black'}}
+                              onPress={() => {
+                                  navigation.navigate('Login')
+                              }}>
+                            Login instead
+                        </Text>
                     </View>
 
-                    {errorMessage ? (
-                        <Text style={{color: 'red', marginBottom: 10}}>{errorMessage}</Text>
-                    ) : null}
+                    <View>
 
-                    <Pressable
-                        style={[uniStyles.btn, uniStyles.bgBlue, uniStyles.width75]}
-                        title="Signup"
-                        onPress={() => {
-                            // navigation.navigate('SignupB')
-                            console.log('Create Account button pressed')
-                            if (email === '' || password === '') {
-                                console.log('Username and/or password cannot be null')
-                            } else if ((email && password && confirmPassword) && password === confirmPassword) {
-                                // console.log('Creating new account for: ', username)
-                                signUp(email, password);
-                                // onLogin
-
-                            } else if (password !== confirmPassword) {
-                                setErrorMessage('Passwords do not match')
-                                console.log('Passwords do not match')
-                            }
-                        }}>
-                        <Text style={[uniStyles.btnText, uniStyles.white]}>Create Account</Text>
-                    </Pressable>
-
-                    <Text style={{marginTop: 10, color: 'black'}}
-                          onPress={() => {
-                              navigation.navigate('Login')
-                          }}>
-                        Login instead
-                    </Text>
-                </View>
-
-                <View>
+                    </View>
 
                 </View>
+
+
 
             </SafeAreaView>
         </LinearGradient>

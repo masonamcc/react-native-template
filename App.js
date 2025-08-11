@@ -1,13 +1,8 @@
-import {StatusBar} from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
-// import {getAllTemplates} from './index';
 import { NavigationContainer } from '@react-navigation/native';
 import MainNavigator from './navigation/MainNavigator';
-// import HomeScreen from "./screens/HomeScreen";
-import { textStyles } from './styles/TextStyles.js';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import {uiStyles} from "./styles/UIStyles";
 
 export default function App() {
 

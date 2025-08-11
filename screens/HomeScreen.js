@@ -1,17 +1,8 @@
 import React, {use, useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, TextInput, Button, Vibration} from 'react-native';
 import {getAllTemplates, getUserFromDb} from '../index';
-import {textStyles} from '../styles/TextStyles.js';
-import {sectionStyles} from '../styles/SectionStyles.js';
-import {gridStyles} from '../styles/GridStyles.js';
-import {uiStyles} from '../styles/UIStyles.js';
-import {troveStyles} from "../styles/TroveStyles";
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {LinearGradient} from 'expo-linear-gradient';
 import '../styles/uniStyles'
 
-import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import appConfig from '../appConfiguration.json'
 import {uniStyles} from "../styles/uniStyles";

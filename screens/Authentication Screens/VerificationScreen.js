@@ -1,9 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, Button, TextInput} from 'react-native';
-import {uiStyles} from "../../styles/UIStyles";
-import {sectionStyles} from "../../styles/SectionStyles";
-import {textStyles} from "../../styles/TextStyles";
-import {LinearGradient} from "expo-linear-gradient";
 import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
 
 import {createUser} from "../../index";
@@ -11,6 +7,7 @@ import {createUser} from "../../index";
 // import './firebase'
 // import {auth} from "../firebase";
 import {Auth} from 'aws-amplify';
+import {uniStyles} from "../../styles/uniStyles";
 
 export default function VerificationScreen({navigation, route, login}) {
 
@@ -41,16 +38,16 @@ export default function VerificationScreen({navigation, route, login}) {
 
     return (
 
-        <SafeAreaView style={sectionStyles.loginSection}>
+        <SafeAreaView style={uniStyles.safeAreaView}>
 
             <View></View>
 
-            <View style={sectionStyles.signUpMiddle}>
+            <View>
                 <Text style={[{fontWeight: 500, marginBottom: 12, fontSize: 25}]}>Verification</Text>
                 <Text style={{marginBottom: 20}}>Please enter the verification code we sent to your email.</Text>
 
                 <TextInput
-                    style={uiStyles.input}
+                    style={uniStyles.input}
                     placeholder="Verification Code"
                     placeholderTextColor={'rgba(0,0,0,.5)'}
                     value={verificationCode}
@@ -62,7 +59,7 @@ export default function VerificationScreen({navigation, route, login}) {
                 </Pressable>
 
                 <Pressable
-                    style={uiStyles.button}
+                    style={uniStyles.button}
                     title="Verify"
                     onPress={() => {
                         // navigation.navigate('SignupB')

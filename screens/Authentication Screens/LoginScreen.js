@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, Button, TextInput} from 'react-native';
-import {uiStyles} from "../../styles/UIStyles";
-import {sectionStyles} from "../../styles/SectionStyles";
-import {textStyles} from "../../styles/TextStyles";
 import {LinearGradient} from "expo-linear-gradient";
 import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
 import {getAllUsers} from '../../index'
@@ -12,7 +9,6 @@ import {Auth} from 'aws-amplify';
 import appConfig from '../../appConfiguration.json'
 
 // Import styles
-import '../../styles/GridStyles.js'
 import {uniStyles} from "../../styles/uniStyles";
 
 export default function LoginScreen({navigation, onLogin}) {
@@ -75,66 +71,75 @@ export default function LoginScreen({navigation, onLogin}) {
             style={{height: '100%'}}
             colors={['#ffffff', '#ffffff']}
         >
-            <SafeAreaView style={sectionStyles.loginSection}>
+            <SafeAreaView style={uniStyles.safeAreaView}>
 
-                <View style={sectionStyles.loginMiddle}>
-                    <Text style={[uniStyles.h2, uniStyles.fontWeight700]}>
-                        {appConfig.appName}
-                    </Text>
-                    <Text style={styles.tagline}>
-                        {appConfig.tagline}
-                    </Text>
+                <View style={[uniStyles.centeredScreen, uniStyles.flex, uniStyles.width75]}>
 
-                    <View style={[uniStyles.py1, uniStyles.width75]}>
-                        <TextInput
-                            style={uiStyles.input}
-                            placeholder="Email"
-                            placeholderTextColor={'#373737'}
-                            value={email}
-                            onChangeText={(input) => setEmail(input.toLowerCase().trim())}
-                        />
+                    <View></View>
 
-                        <TextInput
-                            style={uiStyles.input}
-                            placeholder="Password"
-                            placeholderTextColor={'#373737'}
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry
-                        />
+                    <View style={[uniStyles.centered]}>
+
+                        <Text style={[uniStyles.h2, uniStyles.fontWeight700, uniStyles.textCentered]}>
+                            {appConfig.appName}
+                        </Text>
+                        <Text style={[styles.tagline, uniStyles.textCentered]}>
+                            {appConfig.tagline}
+                        </Text>
+
+                        <View style={[uniStyles.py1, uniStyles.fullwidth]}>
+                            <TextInput
+                                style={uniStyles.input}
+                                placeholder="Email"
+                                placeholderTextColor={'#373737'}
+                                value={email}
+                                onChangeText={(input) => setEmail(input.toLowerCase().trim())}
+                            />
+
+                            <TextInput
+                                style={uniStyles.input}
+                                placeholder="Password"
+                                placeholderTextColor={'#373737'}
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry
+                            />
+                        </View>
+
+                        {errorMessage ? (
+                            <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
+                        ) : <></>}
+
+                        <Pressable
+                            style={[uniStyles.btn, uniStyles.bgBlue, uniStyles.fullwidth]}
+                            onPress={() => {
+                                signIn(email, password)}}
+                        >
+
+                            <Text style={[uniStyles.btnText, uniStyles.white]}>Login</Text>
+                        </Pressable>
+
+                        <Pressable
+                            style={[uniStyles.btn, uniStyles.bgBlue, uniStyles.fullwidth]}
+                            title="Signup"
+                            onPress={() => {
+                                navigation.navigate('SignupStack')
+                            }}>
+                            <Text style={[uniStyles.btnText, uniStyles.white]}>Create an Account</Text>
+                        </Pressable>
                     </View>
-
-                    {errorMessage ? (
-                        <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
-                    ) : <></>}
-
-                    <Pressable
-                        style={[uniStyles.btn, uniStyles.bgBlue, uniStyles.width75]}
-                        onPress={() => {
-                            signIn(email, password)}}
-                    >
-
-                        <Text style={[uniStyles.btnText, uniStyles.white]}>Login</Text>
-                    </Pressable>
-
-                    <Pressable
-                        style={[uniStyles.btn, uniStyles.bgBlue, uniStyles.width75]}
-                        title="Signup"
-                        onPress={() => {
-                            navigation.navigate('SignupStack')
-                        }}>
-                        <Text style={[uniStyles.btnText, uniStyles.white]}>Create an Account</Text>
-                    </Pressable>
+                    <View>
+                        <Text
+                            onPress={() => {
+                                navigation.navigate('DocumentStack')
+                            }}>
+                            Terms of Service
+                        </Text>
+                    </View>
                 </View>
 
-                <View>
-                    <Text
-                        onPress={() => {
-                            navigation.navigate('DocumentStack')
-                        }}>
-                        Terms of Service
-                    </Text>
-                </View>
+
+
+
 
             </SafeAreaView>
         </LinearGradient>

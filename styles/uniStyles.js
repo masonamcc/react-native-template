@@ -51,6 +51,21 @@ export const uniStyles = StyleSheet.create({
         width: "100%",
         backgroundColor: '#e5e5e5'
     },
+    centeredScreen: {
+        height: '100%',
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    centered: {
+        width: "100%",
+        alignItems: "center"
+    },
+    textCentered: {
+        textAlign: "center"
+    },
 
     // Padding //
     p1: {
@@ -185,9 +200,9 @@ export const uniStyles = StyleSheet.create({
     },
 
     // *** Elements *** //
-    inputOt: {
+    input: {
         height: 50,
-        width: '100%',
+        width: 'auto',
         borderColor: 'rgba(0,0,0,.2)',
         borderWidth: 1,
         marginBottom: 10,

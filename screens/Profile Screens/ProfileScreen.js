@@ -9,14 +9,6 @@ import {
     Image,
     Dimensions
 } from 'react-native';
-import {createPost, getMyPosts} from '../../index';
-import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
-import {uiStyles} from "../../styles/UIStyles";
-import {textStyles} from "../../styles/TextStyles";
-import Icon from 'react-native-vector-icons/Ionicons';
-import {Auth, Storage} from "aws-amplify";
-import {Video} from 'expo-av';
-import {BlurView} from "expo-blur";
 import {uniStyles} from "../../styles/uniStyles";
 import appConfig from "../../appConfiguration.json";
 import Header from "../../components/header";

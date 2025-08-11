@@ -1,25 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
-
 import HomeScreen from '../screens/HomeScreen';
-
 import SettingsScreen from '../screens/Profile Screens/SettingsScreen';
 import LoginScreen from '../screens/Authentication Screens/LoginScreen';
 import SignupScreen from '../screens/Authentication Screens/SignupScreen';
 import ProfileScreen from "../screens/Profile Screens/./ProfileScreen";
-
 import {StyleSheet} from "react-native";
 import {Ionicons} from '@expo/vector-icons';
-
-import SearchScreen from "../screens/SearchScreen";
-
-import UserProfileScreen from "../screens/UserProfileScreen"
-
-
 import VerificationScreen from "../screens/Authentication Screens/VerificationScreen";
-import CreatePostScreen from "../screens/Profile Screens/CreatePostScreen";
-
 import TermsOfService from "../screens/Document Screens/TermsOfService.js";
 
 // import SettingsScreen from '../screens/SettingsScreen';
@@ -27,44 +16,25 @@ const RootStack = createStackNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeStack({dbUser, setDbUser}) {
+function HomeStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Home" options={{headerShown: false}}>
-                {(props) => <HomeScreen {...props} dbUser={dbUser} setDbUser={setDbUser}/>}
+                {(props) => <HomeScreen {...props}/>}
             </Stack.Screen>
-            <Stack.Screen name="SearchScreen" options={{
-                title: 'Search',
-                headerBackTitle: ''
-            }}>
-                {(props) => <SearchScreen {...props} dbUser={dbUser}/>}
-            </Stack.Screen>
-            <Stack.Screen name="UserProfile" component={UserProfileScreen} options={{headerShown: false}}/>
 
         </Stack.Navigator>
     );
 }
 
-function ProfileStack({dbUser, setDbUser, logout, dataChanged, setDataChanged}) {
-    const [profileBackgroundEnabled, setProfileBackgroundEnabled] = useState(false);
-    const [profileBackgroundLink, setProfileBackgroundLink] = useState('')
+function ProfileStack() {
     return (
         <Stack.Navigator>
 
             <Stack.Screen name="ProfileScreen" options={{headerShown: false}}>
-                {(props) => <ProfileScreen {...props}
-                                           dbUser={dbUser}
-                                           profileBackgroundEnabled={profileBackgroundEnabled}
-                                           setProfileBackgroundEnabled={setProfileBackgroundEnabled}
-                                           profileBackgroundLink = {profileBackgroundLink}
-                                           setProfileBackgroundLink = {setProfileBackgroundLink}
-                                           dataChanged={dataChanged}
-                                           setDataChanged={setDataChanged}/>}
+                {(props) => <ProfileScreen {...props}/>}
             </Stack.Screen>
 
-            <Stack.Screen name="CreatePostScreen" options={{headerShown: false}}>
-                {(props) => <CreatePostScreen {...props} dbUser={dbUser} dataChanged={dataChanged} setDataChanged={setDataChanged}/>}
-            </Stack.Screen>
 
             <Stack.Screen name="SettingsScreen" options={{
                 title: 'Settings',
@@ -151,10 +121,10 @@ function MainTabs({user, onLogout}) {
             },
         })}>
             <Tab.Screen name="Home" options={{headerShown: false}}>
-                {(props) => <HomeStack {...props} user={user} dbUser={dbUser} setDbUser={setDbUser}/>}
+                {(props) => <HomeStack {...props}/>}
             </Tab.Screen>
             <Tab.Screen name="Profile" options={{headerShown: false}}>
-                {(props) => <ProfileStack {...props} dbUser={dbUser} logout={onLogout} dataChanged={dataChanged} setDataChanged={setDataChanged} />}
+                {(props) => <ProfileStack {...props}/>}
             </Tab.Screen>
 
         </Tab.Navigator>
@@ -180,36 +150,33 @@ export default function MainNavigator() {
                     {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
                 </RootStack.Screen>
             ) : (
-                <RootStack.Screen name="MainTabs">
-                    {(props) => <MainTabs {...props} user={user} onLogout={() => setIsLoggedIn(false)}/>}
-                </RootStack.Screen>
-                // <>
-                //     <RootStack.Screen name="Login">
-                //         {(props) => <LoginStack {...props}
-                //              onLogin={(user) => {
-                //                  console.log('Hello from Main Navigator');
-                //                  setUser(user);      // Save the user here
-                //                  setIsLoggedIn(true);        // Trigger tab navigation
-                //              }}
-                //         />}
-                //     </RootStack.Screen>
-                //     <RootStack.Screen name="SignupStack">
-                //         {(props) => <SignupStack {...props}
-                //              createAccount={(user) => {
-                //                  console.log('Beginning Signup Stack');
-                //                  // setIsLoggedIn(true);
-                //              }}
-                //
-                //              login={(user) => {
-                //                  console.log('Logging user in from Navigator');
-                //                  // setUser(user);      // Save the user here
-                //                  setIsLoggedIn(true);        // Trigger tab navigation
-                //              }}
-                //         />}
-                //     </RootStack.Screen>
-                //     <RootStack.Screen name="DocumentStack" component={DocumentStack} />
-                //
-                // </>
+                <>
+                    <RootStack.Screen name="Login">
+                        {(props) => <LoginStack {...props}
+                             onLogin={(user) => {
+                                 console.log('Hello from Main Navigator');
+                                 setUser(user);      // Save the user here
+                                 setIsLoggedIn(true);        // Trigger tab navigation
+                             }}
+                        />}
+                    </RootStack.Screen>
+                    <RootStack.Screen name="SignupStack">
+                        {(props) => <SignupStack {...props}
+                             createAccount={(user) => {
+                                 console.log('Beginning Signup Stack');
+                                 // setIsLoggedIn(true);
+                             }}
+
+                             login={(user) => {
+                                 console.log('Logging user in from Navigator');
+                                 // setUser(user);      // Save the user here
+                                 setIsLoggedIn(true);        // Trigger tab navigation
+                             }}
+                        />}
+                    </RootStack.Screen>
+                    <RootStack.Screen name="DocumentStack" component={DocumentStack} />
+
+                </>
             )}
         </RootStack.Navigator>
     );
