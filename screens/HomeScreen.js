@@ -7,7 +7,7 @@ import '../styles/uniStyles'
 import appConfig from '../appConfiguration.json'
 import {uniStyles} from "../styles/uniStyles";
 import {StatusBar} from "expo-status-bar";
-import Header from "../components/header";
+import Header from "../reusable components/header";
 
 
 export default function HomeScreen({navigation, route, dbUser, setDbUser}) {

@@ -6,7 +6,7 @@ import {createUser} from "../../index";
 
 // import './firebase'
 // import {auth} from "../firebase";
-import {Auth} from 'aws-amplify';
+
 import {uniStyles} from "../../styles/uniStyles";
 
 export default function VerificationScreen({navigation, route, login}) {

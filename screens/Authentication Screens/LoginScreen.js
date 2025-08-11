@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, Button, TextInput} from 'react-native';
 import {LinearGradient} from "expo-linear-gradient";
 import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
-import {getAllUsers} from '../../index'
-import {Auth} from 'aws-amplify';
 
 // Imports the configuration file
 import appConfig from '../../appConfiguration.json'
@@ -13,55 +11,17 @@ import {uniStyles} from "../../styles/uniStyles";
 
 export default function LoginScreen({navigation, onLogin}) {
 
-    // const [username, setUsername] = useState('');
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('')
     const [dbUser, setDbUser] = useState('');
 
-    const handleLogin = async (usernameInput, password) => {
-       try {
-           if (usernameInput && password) {
-               console.log('Initiating handleLogin...')
-               console.log('Initiating handleLogin... Username Entered: ', usernameInput);
-               console.log('Initiating handleLogin... Password Entered: ', password);
-               console.log('Initiating handleLogin... Getting all users')
-               let response = await getAllUsers()
-               // let loginResults = await response.text();
-               if (response) {
-                   console.log('Initiating handleLogin... All Users have been found: ', response);
-                   console.log('Initiating handleLogin... Searching for: ', usernameInput);
-                   let targetUser = response.find((credential) => credential.username === usernameInput);
-
-                   if (targetUser) {
-                       console.log('Initiating handleLogin... User exists: ', targetUser)
-                       if (password === targetUser.password) {
-                           console.log('passwords match');
-                           // navigation.navigate("Home", { user: targetUser})
-                           onLogin(targetUser);
-                       }
-                   }
-               }
-           } else {
-               setErrorMessage('Please enter both username and password')
-           }
-       } catch (error) {
-           console.log(error)
-       }
-    };
-
     const signIn = async (email, password) => {
         try {
-            const user = await Auth.signIn(email, password);
-            console.log('Signed in', user.attributes.email);
+            // Add sign-in logic with your authentication service
             onLogin()
         } catch (err) {
-            console.log('Err object: ', err.message)
-            if (err.message === 'User does not exist.') {
-                setErrorMessage("We can't find a user with that email.")
-            } else if (err.message === 'Incorrect username or password.') {
-                setErrorMessage("Incorrect username or password.")
-            }
             console.error('Sign in error:', err);
         }
     };

@@ -8,15 +8,6 @@ export default function App() {
 
     return (
         <GestureHandlerRootView style={{flex: 1}}>
-            {/*<SafeAreaView style={styles.safeView}>*/}
-            {/*<View style={uiStyles.header}>*/}
-            {/*    <Text style={textStyles.brand}>trove</Text>*/}
-            {/*    <View>*/}
-
-            {/*    </View>*/}
-            {/*</View>*/}
-
-        {/*</SafeAreaView>*/}
             <NavigationContainer>
                 <MainNavigator/>
             </NavigationContainer>

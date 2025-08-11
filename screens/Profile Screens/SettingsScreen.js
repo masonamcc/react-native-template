@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, Button, TextInput, Switch} from 'react-native';
-import {Auth} from 'aws-amplify';
 import {uniStyles} from "../../styles/uniStyles";
-import Header from "../../components/header";
+import Header from "../../reusable components/header";
 
 export default function SettingsScreen({route, logout, user, profileBackgroundEnabled, setProfileBackgroundEnabled, dataChanged, setDataChanged, dbUser, profileBackgroundLink, setProfileBackgroundLink}) {
 
@@ -10,9 +9,8 @@ export default function SettingsScreen({route, logout, user, profileBackgroundEn
 
     const signOut = async () => {
         try {
-            await Auth.signOut();
+            // Add sign-out logic with your authentication service
             console.log('User signed out');
-            // Optionally navigate to login screen or reset user state
         } catch (error) {
             console.error('Error signing out: ', error);
         }
@@ -20,7 +18,6 @@ export default function SettingsScreen({route, logout, user, profileBackgroundEn
 
     return (
         <SafeAreaView style={uniStyles.safeAreaView}>
-
             <ScrollView style={uniStyles.scrollView}>
                 <View style={uniStyles.centerChildren}>
                     <Text style={uniStyles.fontSize3}>Settings</Text>
@@ -29,14 +26,3 @@ export default function SettingsScreen({route, logout, user, profileBackgroundEn
         </SafeAreaView>
     );
 }
-
-const styles = StyleSheet.create({
-    safeView: {
-        width: '100%',
-        height: "100%",
-        alignItems: 'center',
-        justifyContent: 'start',
-        display: "flex",
-        backgroundColor: 'white'
-    }
-});

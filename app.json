@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Trove",
-    "slug": "trove",
+    "name": "React Native App",
+    "slug": "react-native-app",
     "version": "1.0.0",
     "sdkVersion": "53.0.0",
     "orientation": "portrait",
@@ -11,15 +11,7 @@
     "jsEngine": "hermes",
     "entryPoint": "./index.js",
     "plugins": [
-      "expo-router",
-      [
-
-        "expo-video",
-        {
-          "supportsBackgroundPlayback": true,
-          "supportsPictureInPicture": true
-        }
-      ]
+      "expo-router"
     ],
     "experiments": {
       "typedRoutes": true
@@ -31,7 +23,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.masonamccall.trove",
+      "bundleIdentifier": "com.masonamccall.app",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -42,7 +34,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.masonamccall.trove"
+      "package": "com.masonamccall.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"

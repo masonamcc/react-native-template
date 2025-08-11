@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, Button, TextInput} from 'react-native';
 import {LinearGradient} from "expo-linear-gradient";
 import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
-import {Auth} from 'aws-amplify';
+
 import appConfig from '../../appConfiguration.json'
 import {uniStyles} from "../../styles/uniStyles";
 
@@ -15,13 +15,7 @@ export default function SignupScreen({navigation, onLogin}) {
 
     const signUp = async (email, password) => {
         try {
-            await Auth.signUp({
-                username: email,
-                password,
-                attributes: {
-                    email, // Required for email-based auth
-                },
-            });
+
             console.log('Sign up success');
 
             navigation.navigate('Verification', {email})

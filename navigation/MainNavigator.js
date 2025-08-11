@@ -63,11 +63,10 @@ function DocumentStack() {
 
 
 function LoginStack({onLogin}) {
-    // let SignupScreen;
     return (
         <Stack.Navigator>
             <Stack.Screen name="Login" options={{headerShown: false}}>
-                {(props) => <LoginScreen {...props} login={onLogin}/>}
+                {(props) => <LoginScreen {...props} onLogin={onLogin}/>}
             </Stack.Screen>
         </Stack.Navigator>
     )
@@ -153,11 +152,10 @@ export default function MainNavigator() {
                 <>
                     <RootStack.Screen name="Login">
                         {(props) => <LoginStack {...props}
-                             onLogin={(user) => {
-                                 console.log('Hello from Main Navigator');
-                                 setUser(user);      // Save the user here
-                                 setIsLoggedIn(true);        // Trigger tab navigation
+                             onLogin={() => {
+                                 setIsLoggedIn(true)
                              }}
+
                         />}
                     </RootStack.Screen>
                     <RootStack.Screen name="SignupStack">

@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {uniStyles} from "../../styles/uniStyles";
 import appConfig from "../../appConfiguration.json";
-import Header from "../../components/header";
+import Header from "../../reusable components/header";
 
 export default function ProfileScreen({
     navigation,
