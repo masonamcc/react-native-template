@@ -11,11 +11,7 @@ export const uniStyles = StyleSheet.create({
         height: 500
         // backgroundColor: "red",
     },
-    fontSize3: {
-        fontSize: 40,
-        fontWeight: 700,
-        color: "#cacaca"
-    },
+
 
     // *** Sizing *** //
     fullwidth: {
@@ -159,6 +155,12 @@ export const uniStyles = StyleSheet.create({
 
 
     // *** Fonts *** //
+
+    fontSize3: {
+        fontSize: 40,
+        fontWeight: 700,
+        color: "#cacaca"
+    },
 
     // Sizes //
     h1: {
