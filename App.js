@@ -5,9 +5,9 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import MainNavigator from './navigation/MainNavigator';
 // import HomeScreen from "./screens/HomeScreen";
-import { textStyles } from './Styles/TextStyles.js';
+import { textStyles } from './styles/TextStyles.js';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import {uiStyles} from "./Styles/UIStyles";
+import {uiStyles} from "./styles/UIStyles";
 
 export default function App() {
 

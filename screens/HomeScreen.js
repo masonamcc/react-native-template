@@ -1,39 +1,25 @@
 import React, {use, useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, TextInput, Button, Vibration} from 'react-native';
 import {getAllTemplates, getUserFromDb} from '../index';
-import {textStyles} from '../Styles/TextStyles.js';
-import {sectionStyles} from '../Styles/SectionStyles.js';
-import {gridStyles} from '../Styles/GridStyles.js';
-import {uiStyles} from '../Styles/UIStyles.js';
-import {troveStyles} from "../Styles/TroveStyles";
+import {textStyles} from '../styles/TextStyles.js';
+import {sectionStyles} from '../styles/SectionStyles.js';
+import {gridStyles} from '../styles/GridStyles.js';
+import {uiStyles} from '../styles/UIStyles.js';
+import {troveStyles} from "../styles/TroveStyles";
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {LinearGradient} from 'expo-linear-gradient';
-import '../Styles/uniStyles'
+import '../styles/uniStyles'
 
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import brand from '../appConfiguration.json'
-import {uniStyles} from "../Styles/uniStyles";
+import appConfig from '../appConfiguration.json'
+import {uniStyles} from "../styles/uniStyles";
+import {StatusBar} from "expo-status-bar";
+import Header from "../components/header";
 
 
 export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
-
-    // useEffect(() => {
-    //     const fetchUser = async () => {
-    //         try {
-    //             const user = await Auth.currentAuthenticatedUser();
-    //             const userEmail = user.attributes.email
-    //             const loggedInUser = await getUserFromDb(userEmail);
-    //             console.log('Logged in user: ', loggedInUser)
-    //             setDbUser(loggedInUser);
-    //         } catch (err) {
-    //             console.log('No user signed in', err);
-    //         }
-    //     };
-    //
-    //     fetchUser();
-    // }, []);
 
     const [templates, setTemplates] = useState([]);
 
@@ -62,21 +48,15 @@ export default function HomeScreen({navigation, route, dbUser, setDbUser}) {
     }, []);
 
     return (
-        <SafeAreaView style={styles.safeView}>
-            <View style={uiStyles.header}>
-                <Text style={textStyles.brand}>{brand.appName}</Text>
-                <View style={{padding: 10}}>
-                    <Icon  name="menu-outline" size={25} color="#000" onPress={() => {
-                        navigation.navigate('SearchScreen')
-                    }}/>
-                </View>
-            </View>
+        <SafeAreaView style={uniStyles.safeAreaView}>
+            <Header title={appConfig.appName} topRightFunction={"menu"}/>
 
-            <ScrollView style={{width: '100%', height: '100%', display: "flex", backgroundColor: '#e5e5e5'}}>
+            <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+
+            <ScrollView style={uniStyles.scrollView}>
                 <View style={uniStyles.centerChildren}>
                     <Text style={uniStyles.fontSize3}>Home</Text>
                 </View>
-
             </ScrollView>
         </SafeAreaView>
     );

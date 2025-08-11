@@ -12,12 +12,11 @@ import {
 } from 'react-native';
 import {createPost, getMyPosts} from '../../index';
 import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
-import {uiStyles} from "../../Styles/UIStyles";
-import {textStyles} from "../../Styles/TextStyles";
+import {uiStyles} from "../../styles/UIStyles";
+import {textStyles} from "../../styles/TextStyles";
 import {WebView} from 'react-native-webview';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Auth} from "aws-amplify";
-import {createPostStyles} from "../../Styles/CreatePostStyles";
+import {createPostStyles} from "../../styles/CreatePostStyles";
 
 export default function CreatePostScreen({navigation, route, onLogout, dbUser}) {
     const [inputText, setInputText] = useState('');
@@ -52,7 +51,7 @@ export default function CreatePostScreen({navigation, route, onLogout, dbUser}) 
             setPost('');
 
             if (response) {
-                navigation.navigate('MyProfileScreen', { dataChanged: true });
+                navigation.navigate('ProfileScreen', { dataChanged: true });
             }
 
             // 🔁 Trigger re-fetch through useEffect
@@ -108,7 +107,7 @@ export default function CreatePostScreen({navigation, route, onLogout, dbUser}) 
                         <TextInput style={createPostStyles.textarea}
                                multiline={true}
                                numberOfLines={20}
-                               placeholder={"Speak up!"}
+                               placeholder={"What's on your mind?"}
                                placeholderTextColor={'#c8c8c8'}
                                value={inputText}
                                onChangeText={setInputText}

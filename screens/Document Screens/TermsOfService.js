@@ -1,5 +1,5 @@
 import {View, Text, SafeAreaView, ScrollView} from "react-native";
-import {uniStyles} from "../../Styles/uniStyles";
+import {uniStyles} from "../../styles/uniStyles";
 import appConfig from "../../appConfiguration.json"
 
 export default function TermsOfService() {

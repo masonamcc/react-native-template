@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, StyleSheet, SafeAreaView, Button, TextInput} from 'react-native';
-import {uiStyles} from "../../Styles/UIStyles";
-import {sectionStyles} from "../../Styles/SectionStyles";
-import {textStyles} from "../../Styles/TextStyles";
+import {uiStyles} from "../../styles/UIStyles";
+import {sectionStyles} from "../../styles/SectionStyles";
+import {textStyles} from "../../styles/TextStyles";
 import {LinearGradient} from "expo-linear-gradient";
 import {Pressable, TouchableOpacity} from "react-native-gesture-handler";
 
 import {createUser} from "../../index";
-import Setup1Username from "../Setup Screens/Setup1Username";
+
 // import './firebase'
 // import {auth} from "../firebase";
 import {Auth} from 'aws-amplify';

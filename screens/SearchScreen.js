@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {LinearGradient} from "expo-linear-gradient";
-import {uiStyles} from "../Styles/UIStyles";
+import {uiStyles} from "../styles/UIStyles";
 import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
-import {textStyles} from "../Styles/TextStyles";
+import {textStyles} from "../styles/TextStyles";
 import {getAllTemplates, getAllUsers, searchAllUsers} from "../index";
-import {sectionStyles} from "../Styles/SectionStyles";
-import {gridStyles} from "../Styles/GridStyles";
+import {sectionStyles} from "../styles/SectionStyles";
+import {gridStyles} from "../styles/GridStyles";
 import {Pressable} from "react-native-gesture-handler";
 
 export default function SearchScreen({navigation, route, dbUser}) {

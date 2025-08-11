@@ -3,11 +3,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from '../screens/HomeScreen';
-import TemplateDetailsScreen from "../screens/TemplateDetailsScreen";
+
 import SettingsScreen from '../screens/Profile Screens/SettingsScreen';
 import LoginScreen from '../screens/Authentication Screens/LoginScreen';
 import SignupScreen from '../screens/Authentication Screens/SignupScreen';
-import MyProfileScreen from "../screens/Profile Screens/MyProfileScreen";
+import ProfileScreen from "../screens/Profile Screens/./ProfileScreen";
 
 import {StyleSheet} from "react-native";
 import {Ionicons} from '@expo/vector-icons';
@@ -19,12 +19,6 @@ import UserProfileScreen from "../screens/UserProfileScreen"
 
 import VerificationScreen from "../screens/Authentication Screens/VerificationScreen";
 import CreatePostScreen from "../screens/Profile Screens/CreatePostScreen";
-
-// SignUp Stack Screens
-import Setup1Username from "../screens/Setup Screens/Setup1Username";
-import Setup2Name from "../screens/Setup Screens/Setup2Name";
-import Setup3Bio from "../screens/Setup Screens/Setup3Bio";
-import SetupFinal from "../screens/Setup Screens/SetupFinal";
 
 import TermsOfService from "../screens/Document Screens/TermsOfService.js";
 
@@ -46,10 +40,7 @@ function HomeStack({dbUser, setDbUser}) {
                 {(props) => <SearchScreen {...props} dbUser={dbUser}/>}
             </Stack.Screen>
             <Stack.Screen name="UserProfile" component={UserProfileScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="TemplateDetails" component={TemplateDetailsScreen} options={{
-                title: '',
-                headerBackTitle: 'Back'
-            }}/>
+
         </Stack.Navigator>
     );
 }
@@ -60,23 +51,23 @@ function ProfileStack({dbUser, setDbUser, logout, dataChanged, setDataChanged}) 
     return (
         <Stack.Navigator>
 
-            <Stack.Screen name="MyProfileScreen" options={{headerShown: false}}>
-                {(props) => <MyProfileScreen {...props}
-                     dbUser={dbUser}
-                     profileBackgroundEnabled={profileBackgroundEnabled}
-                     setProfileBackgroundEnabled={setProfileBackgroundEnabled}
-                     profileBackgroundLink = {profileBackgroundLink}
-                     setProfileBackgroundLink = {setProfileBackgroundLink}
-                     dataChanged={dataChanged}
-                     setDataChanged={setDataChanged}/>}
+            <Stack.Screen name="ProfileScreen" options={{headerShown: false}}>
+                {(props) => <ProfileScreen {...props}
+                                           dbUser={dbUser}
+                                           profileBackgroundEnabled={profileBackgroundEnabled}
+                                           setProfileBackgroundEnabled={setProfileBackgroundEnabled}
+                                           profileBackgroundLink = {profileBackgroundLink}
+                                           setProfileBackgroundLink = {setProfileBackgroundLink}
+                                           dataChanged={dataChanged}
+                                           setDataChanged={setDataChanged}/>}
             </Stack.Screen>
 
             <Stack.Screen name="CreatePostScreen" options={{headerShown: false}}>
                 {(props) => <CreatePostScreen {...props} dbUser={dbUser} dataChanged={dataChanged} setDataChanged={setDataChanged}/>}
             </Stack.Screen>
 
-            <Stack.Screen name="Settings" options={{
-                title: 'Profile Settings',
+            <Stack.Screen name="SettingsScreen" options={{
+                title: 'Settings',
                 headerBackTitle: 'Back'
             }}>
                 {(props) => <SettingsScreen {...props}
@@ -123,20 +114,7 @@ function SignupStack({createAccount, user, login}) {
             <Stack.Screen name="Verification" options={{headerShown: false}}>
                 {(props) => <VerificationScreen {...props} login={login}/>}
             </Stack.Screen>
-            <Stack.Screen name="Setup1" component={Setup1Username} options={{
-                headerShown: false,
-            }}/>
-            <Stack.Screen name="Setup2" component={Setup2Name} options={{
-                headerShown: false,
-            }}/>
-            <Stack.Screen name="Setup3" component={Setup3Bio} options={{
-                headerShown: false,
-            }}/>
-            <Stack.Screen name="SetupFinal" options={{
-                headerShown: false,
-            }}>
-                {(props) => <SetupFinal {...props} login={login}/>}
-            </Stack.Screen>
+
         </Stack.Navigator>
     )
 }

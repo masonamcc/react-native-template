@@ -5,9 +5,10 @@ export const uniStyles = StyleSheet.create({
     centerChildren: {
         justifyContent: "center",
         alignItems: "center",
-        minHeight: '100%',
+        // minHeight: '100%',
         width: "100%",
         textAlign: "center",
+        height: 500
         // backgroundColor: "red",
     },
     fontSize3: {
@@ -44,7 +45,11 @@ export const uniStyles = StyleSheet.create({
         flexDirection: 'row',
         top: 0,
         paddingBottom: 10,
-        paddingInline: 20
+    },
+    scrollView: {
+        height: "100%",
+        width: "100%",
+        backgroundColor: '#e5e5e5'
     },
 
     // Padding //
@@ -54,6 +59,9 @@ export const uniStyles = StyleSheet.create({
     py1: {
         paddingBlock: 10
     },
+    px1: {
+        paddingInline: 10
+    },
     py1_5: {
         paddingBlock: 15
     },
@@ -62,6 +70,9 @@ export const uniStyles = StyleSheet.create({
     },
     py2: {
         paddingBlock: 20
+    },
+    px2: {
+        paddingInline: 20
     },
     py2_5: {
         paddingBlock: 25
@@ -184,5 +195,10 @@ export const uniStyles = StyleSheet.create({
         paddingHorizontal: 10,
         color: '#000000'
     },
+
+    // *** Spacing *** //
+    spaceBetween: {
+        justifyContent: 'space-between'
+    }
 
 })

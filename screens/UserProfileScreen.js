@@ -12,15 +12,15 @@ import {
 } from 'react-native';
 import {createPost, getMyPosts} from '../index';
 import {Pressable} from "react-native-gesture-handler";
-import {uiStyles} from "../Styles/UIStyles";
-import {textStyles} from "../Styles/TextStyles";
+import {uiStyles} from "../styles/UIStyles";
+import {textStyles} from "../styles/TextStyles";
 import {WebView} from 'react-native-webview';
 import {Ionicons} from "@expo/vector-icons";
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Auth} from "aws-amplify";
 
 
-import {troveStyles} from "../Styles/TroveStyles";
+import {troveStyles} from "../styles/TroveStyles";
 // import Spline from '@splinetool/react-spline';
 
 export default function UserProfileScreen({route}) {
